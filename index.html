@@ -4,18 +4,20 @@
         <link rel="stylesheet" href="css/index.css"/>
         <script src="js/index.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-    <h3>My Google Maps Demo</h3>
-        <div id="map"></div>
-
-        <!--Load the API from the specified URL
-        * The async attribute allows the browser to render the page while the API loads
-        * The key parameter will contain your own API key (which is not needed for this tutorial)
-        * The callback parameter executes the initMap() function
-        -->
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArUeQk1WlfjjjzgUqR1i0-s85AqBuIx1Q&callback=initMap">
         </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="about.html">ROKCET</a>
+            </div>
+            <div id="search">
+                Search
+            </div>
+        </div>
+        <div id="map"></div>
+
     </body>
 </html>
