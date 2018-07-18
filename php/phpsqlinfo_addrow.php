@@ -11,13 +11,13 @@ if(!$connection)
     die('Not connected : ' . mysqli_error());
 }
 
-$db_selected = mysqli_select_db($database, $connection);
+$db_selected = mysqli_select_db($connection, $database);
 if($db_selected)
 {
     die('Can\'t use db : ' . mysqli_error());
 }
 
-$query = sprinf("INSERT INTO events " .
+$query = sprintf("INSERT INTO events " .
         " (id, lat, lng, weight) " .
         " VALUES (NULL, '%s', '%s', '%s');",
         mysqli_real_escape_string($lat),
