@@ -20,15 +20,15 @@ if(!$db_selected)
 $query = sprintf("INSERT INTO events " .
         " (id, lat, lng, weight) " .
         " VALUES (NULL, '%s', '%s', '%s');",
-        mysqli_real_escape_string($lat),
-        mysqli_real_escape_string($lng),
-        mysqli_real_escape_string($weight));
+        mysqli_real_escape_string($connection, $lat),
+        mysqli_real_escape_string($connection, $lng),
+        mysqli_real_escape_string($connection, $weight));
 
 /*$query = "INSERT INTO events " .
         " (id, lat, lng, weight) " .
         " VALUES (NULL, 123.123, 123.123, 1);*/
 
-$result = mysqli_query($query);
+$result = mysqli_query($connection, $query);
 
 if(!$result)
 {
