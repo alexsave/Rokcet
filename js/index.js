@@ -122,7 +122,7 @@ function initMap() {
 function saveData()
 {
     var latlng = marker.getPosition();
-    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&up=' + 1;
+    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&up=1';
 
     downloadUrl(url, function(data, responseCode)
     {
