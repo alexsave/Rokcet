@@ -1,3 +1,8 @@
+var map;
+var marker;
+var infowindow;
+var messagewindow;
+
 function initMap() {
     var durham = {lat: 43.136, lng: -70.926};
 
@@ -90,7 +95,24 @@ function initMap() {
 
     }
 
-    var map = new google.maps.Map( document.getElementById('map'), mOptions);
+    map = new google.maps.Map( document.getElementById('map'), mOptions);
 
-    //var marker = new google.maps.Marker({position: durham, map: map});
+    infowindow = new google.maps.InfoWindow({content: document.getElementById('form')});
+    messagewindow = new google.maps.InfoWindow({content: document.getElementById('message')});
+
+    google.maps.event.addListener(map, "click", function(event)
+    {
+        marker = new google.maps.Marker({
+            position: event.latLng,
+            map: map,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 2,
+                strokeColor: 'red',
+                strokeWeight: 1,
+                fillColor: 'red',
+                fillOpacity: 0.5
+            }
+        })
+    });
 }
