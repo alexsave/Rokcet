@@ -17,12 +17,16 @@ if($db_selected)
     die('Can\'t use db : ' . mysql_error());
 }
 
-$query = sprinf("INSERT INTO events " .
+/*$query = sprinf("INSERT INTO events " .
         " (id, lat, lng, weight) " .
         " VALUES (NULL, '%s', '%s', '%s');",
         mysql_real_escape_string($lat),
         mysql_real_escape_string($lng),
-        mysql_real_escape_string($weight));
+        mysql_real_escape_string($weight));*/
+
+$query = "INSERT INTO events " .
+        " (id, lat, lng, weight) " .
+        " VALUES (NULL, 123.123, 123.123, 1);
 
 $result = mysql_query($query);
 
