@@ -8,13 +8,13 @@ $weight = $_GET['up'];
 $connection=mysqli_connect("localhost", $username, $password);
 if(!$connection)
 {
-    die('Not connected : ' . mysqli_error());
+    die('Not connected : ' . mysqli_error($connection));
 }
 
 $db_selected = mysqli_select_db($connection, $database);
 if($db_selected)
 {
-    die('Can\'t use db : ' . mysqli_error());
+    die('Can\'t use db : ' . mysqli_error($connection));
 }
 
 $query = sprintf("INSERT INTO events " .
@@ -32,7 +32,7 @@ $result = mysqli_query($query);
 
 if(!$result)
 {
-    die('Invalid query: ' . mysqli_error());
+    die('Invalid query: ' . mysqli_error($connection));
 }
 
 ?>
