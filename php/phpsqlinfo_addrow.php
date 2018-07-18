@@ -5,34 +5,34 @@ $lat = $_GET['lat'];
 $lng = $_GET['lng'];
 $weight = $_GET['up'];
 
-$connection=mysql_connect("localhost", $username, $password);
+$connection=mysqli_connect("localhost", $username, $password);
 if(!$connection)
 {
-    die('Not connected : ' . mysql_error());
+    die('Not connected : ' . mysqli_error());
 }
 
-$db_selected = mysql_select_db($database, $connection);
+$db_selected = mysqli_select_db($database, $connection);
 if($db_selected)
 {
-    die('Can\'t use db : ' . mysql_error());
+    die('Can\'t use db : ' . mysqli_error());
 }
 
 $query = sprinf("INSERT INTO events " .
         " (id, lat, lng, weight) " .
         " VALUES (NULL, '%s', '%s', '%s');",
-        mysql_real_escape_string($lat),
-        mysql_real_escape_string($lng),
-        mysql_real_escape_string($weight));
+        mysqli_real_escape_string($lat),
+        mysqli_real_escape_string($lng),
+        mysqli_real_escape_string($weight));
 
 /*$query = "INSERT INTO events " .
         " (id, lat, lng, weight) " .
         " VALUES (NULL, 123.123, 123.123, 1);*/
 
-$result = mysql_query($query);
+$result = mysqli_query($query);
 
 if(!$result)
 {
-    die('Invalid query: ' . mysql_error());
+    die('Invalid query: ' . mysqli_error());
 }
 
 ?>
