@@ -117,7 +117,7 @@ function initMap() {
     ];
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
-        var xml = data.responseText;
+        var xml = data;//.responseText;
         debugger;
         var markers = xml.documentElement.getElementsByTagName('events');
         Array.prototype.forEach.call(markers, function(markerElem) {
