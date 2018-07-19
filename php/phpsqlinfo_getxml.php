@@ -36,7 +36,6 @@ while($row = @mysqli_fetch_assoc($result))
     $newnode->setAttribute("weight", $row['weight']);
 }
 
-$xmlfile = $doc->dump_mem();
-echo $xmlfile;
+echo $dom->saveXML();
 
 ?>
