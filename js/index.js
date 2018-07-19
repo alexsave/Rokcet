@@ -199,7 +199,7 @@ function downloadUrl(url, callback)
         {
             request.onreadystatechange = doNothing;
             //callback(request.responseText, request.status);//this line needs to be changed to response xml
-            callback(request.response, request.status);//this line needs to be changed to response xml
+            callback(request, request.status);//this line needs to be changed to response xml
         }
     };
     request.open('GET', url, true);
