@@ -127,7 +127,8 @@ function initMap() {
             var point = new google.maps.LatLng(
                 parseFloat(markerElem.getAttribute('lat')),
                 parseFloat(markerElem.getAttribute('lng')));
-            heatmapData.push({location: point, weight: weight});
+            //heatmapData.push({location: point, weight: weight});
+            heatmapData.push(point);
         });
 
             /*var infowincontent = document.createElement('div');
