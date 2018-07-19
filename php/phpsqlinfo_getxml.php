@@ -28,7 +28,7 @@ header('Content-type: text/xml; charset=utf-8');
 
 while($row = @mysqli_fetch_assoc($result))
 {
-    $node = $doc->createElement("events");
+    $node = $doc->createElement("event");
     $newnode = $parnode->appendChild($node);
 
     $newnode->setAttribute("lat", $row['lat']);

@@ -118,8 +118,7 @@ function initMap() {
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
         var xml = data.responseXML;
-        debugger;
-        var markers = xml.documentElement.getElementsByTagName('events');
+        var markers = xml.documentElement.getElementsByTagName('event');
         Array.prototype.forEach.call(markers, function(markerElem) {
             //var id = markerElem.getAttribute('id');
             var name = markerElem.getAttribute('name');
