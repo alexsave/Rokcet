@@ -117,7 +117,7 @@ function initMap() {
     ];
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
-        var xml = data.responseXML;
+        var xml = data.responseText;
         debugger;
         var markers = xml.documentElement.getElementsByTagName('events');
         Array.prototype.forEach.call(markers, function(markerElem) {
@@ -191,7 +191,7 @@ function saveData()
 function downloadUrl(url, callback)
 {
     var request = new XMLHttpRequest;
-    request.overrideMimeType("text/xml");
+    //request.overrideMimeType("text/xml");
 
     request.onreadystatechange = function()
     {
