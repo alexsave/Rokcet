@@ -175,7 +175,7 @@ function saveData()
 
     downloadUrl(url, function(data, responseCode)
     {
-        if(responseCode ==  200 && data.length <= 1)
+        if(responseCode ==  200 && data.responseText.length <= 1)
         {
             infowindow.close();
             messagewindow.open(map, marker);
