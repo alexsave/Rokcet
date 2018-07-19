@@ -117,7 +117,7 @@ function initMap() {
     ];
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
-        var xml = data;//.responseText;
+        var xml = data.responseXML;
         debugger;
         var markers = xml.documentElement.getElementsByTagName('events');
         Array.prototype.forEach.call(markers, function(markerElem) {
@@ -198,7 +198,8 @@ function downloadUrl(url, callback)
         if(request.readyState == 4)
         {
             request.onreadystatechange = doNothing;
-            callback(request.responseText, request.status);
+            //callback(request.responseText, request.status);//this line needs to be changed to response xml
+            callback(request.response, request.status);//this line needs to be changed to response xml
         }
     };
     request.open('GET', url, true);
