@@ -1,7 +1,7 @@
 <?php
 require("phpsqlinfo_dbinfo.php");
 
-$doc = docxml_new_doc("1.0");
+$doc = new DOMDocument("1.0");
 $node = $doc->create_element("events");
 $parnode = $doc->append_child($node);
 
