@@ -110,10 +110,10 @@ function initMap() {
     map = new google.maps.Map( document.getElementById('map'), mOptions);
 
     var heatmapData = [
-        new google.maps.LatLng(43.1263,-70.9338),
-        new google.maps.LatLng(43.1264,-70.9339),
-        new google.maps.LatLng(43.1265,-70.9337),
-        new google.maps.LatLng(43.1266,-70.9330)
+        {location: new google.maps.LatLng(43.1261,-70.9337), weight: 1},
+        {location: new google.maps.LatLng(43.1262,-70.9338), weight: 1},
+        {location: new google.maps.LatLng(43.1263,-70.9339), weight: 1},
+        {location: new google.maps.LatLng(43.1264,-70.9336), weight: 1}
     ];
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
