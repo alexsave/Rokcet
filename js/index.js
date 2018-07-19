@@ -128,6 +128,7 @@ function initMap() {
                 parseFloat(markerElem.getAttribute('lat')),
                 parseFloat(markerElem.getAttribute('lng')));
             heatmapData.push({location: point, weight: weight});
+        });
 
             /*var infowincontent = document.createElement('div');
             var strong = document.createElement('strong');
@@ -143,7 +144,8 @@ function initMap() {
                 map: map,
                 position: point,
                 label: icon.label*/
-            });
+            //});
+        });
 
     heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
     heatmap.setMap(map);
