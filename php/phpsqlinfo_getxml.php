@@ -24,7 +24,7 @@ if(!$result)
     die('Invalid query: ' . mysqli_error($connection));
 }
 
-header("Content-type: text/xml");
+header('Content-type: text/xml; charset=utf-8');
 
 while($row = @mysqli_fetch_assoc($result))
 {
