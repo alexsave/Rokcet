@@ -109,12 +109,7 @@ function initMap() {
 
     map = new google.maps.Map( document.getElementById('map'), mOptions);
 
-    var heatmapData = [
-        {location: new google.maps.LatLng(43.1261,-70.9337), weight: 1},
-        {location: new google.maps.LatLng(43.1262,-70.9338), weight: 1},
-        {location: new google.maps.LatLng(43.1263,-70.9339), weight: 1},
-        {location: new google.maps.LatLng(43.1264,-70.9336), weight: 1}
-    ];
+    var heatmapData = [];
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
         var xml = data.responseXML;
