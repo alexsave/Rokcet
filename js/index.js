@@ -3,6 +3,17 @@ var marker;
 var infowindow;
 var messagewindow;
 
+var customLabel = {
+    restaurant:{
+        label: 'R'
+    },
+    bar: {
+        label: 'B'
+    }
+};
+
+var heatmap;
+
 function initMap() {
     var durham = {lat: 43.136, lng: -70.926};
 
@@ -11,6 +22,7 @@ function initMap() {
         zoom: 15,
         center: durham,
         disableDefaultUI: true,
+        gestureHandling: 'greedy',
         styles:
         [
             {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
@@ -97,6 +109,18 @@ function initMap() {
 
     map = new google.maps.Map( document.getElementById('map'), mOptions);
 
+    var heatmapData = [
+        new google.maps.LatLng(43.1263,-70.9338),
+        new google.maps.LatLng(43.1264,-70.9339),
+        new google.maps.LatLng(43.1265,-70.9337),
+        new google.maps.LatLng(43.1266,-70.9330)
+    ];
+
+
+
+    heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
+    heatmap.setMap(map);
+
     infowindow = new google.maps.InfoWindow({content: document.getElementById('form')});
     messagewindow = new google.maps.InfoWindow({content: document.getElementById('message')});
 
@@ -153,3 +177,4 @@ function downloadUrl(url, callback)
 }
 
 function doNothing() {}
+
