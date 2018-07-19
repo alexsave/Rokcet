@@ -116,7 +116,34 @@ function initMap() {
         new google.maps.LatLng(43.1266,-70.9330)
     ];
 
+    downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
+        var xml = data.responseXML;
+        var markers = xml.documentElement.getElementsByTagName('events');
+        Array.prototype.forEach.call(markers, function(markerElem) {
+            //var id = markerElem.getAttribute('id');
+            var name = markerElem.getAttribute('name');
+            var address = markerElem.getAttribute('address');
+            var weight = markerElem.getAttribute('weight');
+            var point = new google.maps.LatLng(
+                parseFloat(markerElem.getAttribute('lat')),
+                parseFloat(markerElem.getAttribute('lng')));
+            heatmapData.push({location: point, weight: weight});
 
+            /*var infowincontent = document.createElement('div');
+            var strong = document.createElement('strong');
+            strong.textContent = name
+            infowincontent.appendChild(strong);
+            infowincontent.appendChild(document.createElement('br'));
+
+            var text = document.createElement('text');
+            text.textContent = address
+            infowincontent.appendChild(text);
+            var icon = customLabel[type] || {};
+            var marker = new google.maps.Marker({
+                map: map,
+                position: point,
+                label: icon.label*/
+            });
 
     heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
     heatmap.setMap(map);
