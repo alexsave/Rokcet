@@ -2,8 +2,8 @@
 require("phpsqlinfo_dbinfo.php");
 
 $doc = new DOMDocument("1.0");
-$node = $doc->create_element("events");
-$parnode = $doc->append_child($node);
+$node = $doc->createElement("events");
+$parnode = $doc->appendChild($node);
 
 $connection=mysqli_connect("localhost", $username, $password);
 if(!$connection)
@@ -28,12 +28,12 @@ header("Content-type: text/xml");
 
 while($row = @mysqli_fetch_assoc($result))
 {
-    $node = $doc->create_element("events");
-    $newnode = $parnode->append_child($node);
+    $node = $doc->createElement("events");
+    $newnode = $parnode->appendChild($node);
 
-    $newnode->set_attribute("lat", $row['lat']);
-    $newnode->set_attribute("lng", $row['lng']);
-    $newnode->set_attribute("weight", $row['weight']);
+    $newnode->setAttribute("lat", $row['lat']);
+    $newnode->setAttribute("lng", $row['lng']);
+    $newnode->setAttribute("weight", $row['weight']);
 }
 
 $xmlfile = $doc->dump_mem();
