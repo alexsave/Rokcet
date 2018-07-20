@@ -188,23 +188,19 @@ function saveData()
 
 function getAddress(latlng)
 {
-    var a = "-1";
-    geocoder.geocode({'location': latlng}, function(results, status)
+    return geocoder.geocode({'location': latlng}, function(results, status)
     {
         if (status === 'OK')
         {
-            if (results[0]) {
-                a = results[0]["formatted_address"];
-                //window.alert(results[0]["formatted_address"]);
-                alert(a);
-            }
+            if (results[0])
+                return results[0]["formatted_address"];
             else
                 window.alert('No results found');
         }
         else
             window.alert('Geocoder failed due to: ' + status);
+        return "-1";
     });
-    return a;
 }
 
 function downloadUrl(url, callback)
