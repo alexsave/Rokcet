@@ -4,7 +4,7 @@ require("phpsqlinfo_dbinfo.php");
 $lat = $_GET['lat'];
 $lng = $_GET['lng'];
 $weight = $_GET['up'];
-$addr = $_GET['addr'];
+$addr = 'test';//$_GET['addr'];
 
 $connection=mysqli_connect("localhost", $username, $password);
 if(!$connection)
