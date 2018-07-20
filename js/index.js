@@ -3,15 +3,6 @@ var marker;
 var infowindow;
 var messagewindow;
 
-var customLabel = {
-    restaurant:{
-        label: 'R'
-    },
-    bar: {
-        label: 'B'
-    }
-};
-
 var heatmap;
 
 function initMap() {
@@ -75,8 +66,13 @@ function initMap() {
             },
             {
                 featureType: 'road.highway',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#f3d19c'}]
+                elementType: 'labels',
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: 'water',
+                elementType: 'labels',
+                stylers: [{visibility: "off"}]
             },
             {
                 featureType: 'transit',
@@ -85,8 +81,8 @@ function initMap() {
             },
             {
                 featureType: 'transit.station',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#d59563'}]
+                elementType: 'labels',
+                stylers: [{visibility: 'off'}]
             },
             {
                 featureType: 'water',
@@ -171,7 +167,7 @@ function initMap() {
 function saveData()
 {
     var latlng = marker.getPosition();
-    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&up=1';
+    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + '123 main st' + '&up=1';
 
     downloadUrl(url, function(data, responseCode)
     {
