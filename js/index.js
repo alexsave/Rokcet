@@ -5,6 +5,8 @@ var messagewindow;
 
 var heatmap;
 
+var geocoder;
+
 function initMap() {
     var durham = {lat: 43.136, lng: -70.926};
 
@@ -142,6 +144,8 @@ function initMap() {
     heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
     heatmap.setMap(map);
 
+    geocoder = new google.maps.GeoCoder;
+
     infowindow = new google.maps.InfoWindow({content: document.getElementById('form')});
     messagewindow = new google.maps.InfoWindow({content: document.getElementById('message')});
 
@@ -167,7 +171,10 @@ function initMap() {
 function saveData()
 {
     var latlng = marker.getPosition();
-    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + '123 main st' + '&up=1';
+
+    var addr = getAddress(latlng);
+
+    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + addr + '&up=1';
 
     downloadUrl(url, function(data, responseCode)
     {
@@ -177,6 +184,23 @@ function saveData()
             messagewindow.open(map, marker);
         }
     });
+}
+
+function getAddress(latlng)
+{
+    geocoder.geocode({'location': latlng}, function(results, status)
+    {
+        if (status === 'OK')
+        {
+            if (results[0])
+                return result[0]["formatted_address"];
+            else
+                window.alert('No results found');
+        }
+        else
+            window.alert('Geocoder failed due to: ' + status);
+    });
+    return '-1';
 }
 
 function downloadUrl(url, callback)
