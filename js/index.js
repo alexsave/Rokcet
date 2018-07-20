@@ -191,7 +191,11 @@ function saveData()
 
 function getAddress(latlng)
 {
-    geocoder.geocode({'location': latlng}, writeEntry(latlng, results, status));
+    //geocoder.geocode({'location': latlng}, writeEntry(latlng, results, status));
+    geocoder.geocode({'location': latlng}, function(results, status)
+    {
+        writeEntry(latlng,results,status);
+    });
     /*geocoder.geocode({'location': latlng}, function(results, status)
     {
         if (status === 'OK')
