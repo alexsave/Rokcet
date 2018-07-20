@@ -191,8 +191,8 @@ function saveData()
 
 function getAddress(latlng)
 {
-    current = "-1";
-    geocoder.geocode({'location': latlng}, function(results, status)
+    geocoder.geocode({'location': latlng}, writeEntry(latlng, results, status));
+    /*geocoder.geocode({'location': latlng}, function(results, status)
     {
         if (status === 'OK')
         {
@@ -203,6 +203,29 @@ function getAddress(latlng)
         }
         else
             window.alert('Geocoder failed due to: ' + status);
+    });*/
+}
+
+function writeEntry(latlng, results, status)
+{
+    var a = "-1";
+    if(status === 'OK') {
+        if (results[0])
+            a = results[0]["formatted_address"];
+        else
+            window.alert('No results found');
+
+    }
+    else
+        window.alert('Geocoder failed due to: ' + status);
+
+    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + a + '&up=1';
+
+    downloadUrl(url, function(data, responseCode) {
+        if (responseCode == 200 && data.responseText.length <= 1) {
+            infowindow.close();
+            messagewindow.open(map, marker);
+        }
     });
 }
 
