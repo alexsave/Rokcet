@@ -126,21 +126,6 @@ function initMap() {
             heatmapData.push(point);
         });
 
-            /*var infowincontent = document.createElement('div');
-            var strong = document.createElement('strong');
-            strong.textContent = name
-            infowincontent.appendChild(strong);
-            infowincontent.appendChild(document.createElement('br'));
-
-            var text = document.createElement('text');
-            text.textContent = address
-            infowincontent.appendChild(text);
-            var icon = customLabel[type] || {};
-            var marker = new google.maps.Marker({
-                map: map,
-                position: point,
-                label: icon.label*/
-            //});
         });
 
     heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
@@ -173,11 +158,6 @@ function initMap() {
 function saveData()
 {
     var latlng = marker.getPosition();
-    /*getAddress(latlng);
-}
-
-function getAddress(latlng)
-{*/
     geocoder.geocode({'location': latlng}, function(results, status)
     {
         writeEntry(latlng,results,status);
@@ -210,14 +190,12 @@ function writeEntry(latlng, results, status)
 function downloadUrl(url, callback)
 {
     var request = new XMLHttpRequest;
-    //request.overrideMimeType("text/xml");
 
     request.onreadystatechange = function()
     {
         if(request.readyState == 4)
         {
             request.onreadystatechange = doNothing;
-            //callback(request.responseText, request.status);//this line needs to be changed to response xml
             callback(request, request.status);//this line needs to be changed to response xml
         }
     };
