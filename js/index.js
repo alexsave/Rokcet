@@ -193,9 +193,11 @@ function getAddress(latlng)
     {
         if (status === 'OK')
         {
-            if (results[0])
-                //a = results[0]["formatted_address"];
-                window.alert(results[0]["formatted_address"]);
+            if (results[0]) {
+                a = results[0]["formatted_address"];
+                //window.alert(results[0]["formatted_address"]);
+                alert(a);
+            }
             else
                 window.alert('No results found');
         }
