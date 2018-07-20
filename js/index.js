@@ -144,7 +144,7 @@ function initMap() {
     heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
     heatmap.setMap(map);
 
-    geocoder = new google.maps.GeoCoder;
+    geocoder = new google.maps.Geocoder;
 
     infowindow = new google.maps.InfoWindow({content: document.getElementById('form')});
     messagewindow = new google.maps.InfoWindow({content: document.getElementById('message')});
