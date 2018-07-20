@@ -19,8 +19,8 @@ if(!$db_selected)
 }
 
 $query = sprintf("INSERT INTO events " .
-        " (id, lat, lng, addr, weight) " .
-        " VALUES (NULL, '%s', '%s', '%s', '%s');",
+        " (id, time, lat, lng, addr, weight) " .
+        " VALUES (NULL, NULL, '%s', '%s', '%s', '%s');",
         mysqli_real_escape_string($connection, $lat),
         mysqli_real_escape_string($connection, $lng),
         mysqli_real_escape_string($connection, $addr),
