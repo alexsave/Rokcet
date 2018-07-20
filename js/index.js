@@ -173,10 +173,9 @@ function initMap() {
 function saveData()
 {
     var latlng = marker.getPosition();
+    getAddress(latlng);
 
-    var addr = getAddress(latlng);
-
-    alert(current);
+    /*alert(current);
     var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + current + '&up=1';
 
     downloadUrl(url, function(data, responseCode)
@@ -186,7 +185,7 @@ function saveData()
             infowindow.close();
             messagewindow.open(map, marker);
         }
-    });
+    });*/
 }
 
 function getAddress(latlng)
