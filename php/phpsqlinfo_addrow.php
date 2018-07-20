@@ -4,7 +4,7 @@ require("phpsqlinfo_dbinfo.php");
 $lat = $_GET['lat'];
 $lng = $_GET['lng'];
 $weight = $_GET['up'];
-$addr = 'test';//$_GET['addr'];
+$addr = $_GET['addr'];
 
 $connection=mysqli_connect("localhost", $username, $password);
 if(!$connection)
@@ -19,8 +19,8 @@ if(!$db_selected)
 }
 
 $query = sprintf("INSERT INTO events " .
-        " (id, time, lat, lng, addr, weight) " .
-        " VALUES (NULL, NULL, '%s', '%s', '%s', '%s');",
+        " (id, lat, lng, addr, weight) " .
+        " VALUES (NULL, '%s', '%s', '%s', '%s');",
         mysqli_real_escape_string($connection, $lat),
         mysqli_real_escape_string($connection, $lng),
         mysqli_real_escape_string($connection, $addr),
