@@ -173,40 +173,15 @@ function initMap() {
 function saveData()
 {
     var latlng = marker.getPosition();
-    getAddress(latlng);
-
-    /*alert(current);
-    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + current + '&up=1';
-
-    downloadUrl(url, function(data, responseCode)
-    {
-        if(responseCode ==  200 && data.responseText.length <= 1)
-        {
-            infowindow.close();
-            messagewindow.open(map, marker);
-        }
-    });*/
+    /*getAddress(latlng);
 }
 
 function getAddress(latlng)
-{
-    //geocoder.geocode({'location': latlng}, writeEntry(latlng, results, status));
+{*/
     geocoder.geocode({'location': latlng}, function(results, status)
     {
         writeEntry(latlng,results,status);
     });
-    /*geocoder.geocode({'location': latlng}, function(results, status)
-    {
-        if (status === 'OK')
-        {
-            if (results[0])
-                current = results[0]["formatted_address"];
-            else
-                window.alert('No results found');
-        }
-        else
-            window.alert('Geocoder failed due to: ' + status);
-    });*/
 }
 
 function writeEntry(latlng, results, status)
