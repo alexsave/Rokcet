@@ -7,6 +7,8 @@ var heatmap;
 
 var geocoder;
 
+var current;
+
 function initMap() {
     var durham = {lat: 43.136, lng: -70.926};
 
@@ -174,7 +176,7 @@ function saveData()
 
     var addr = getAddress(latlng);
 
-    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + addr + '&up=1';
+    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + current + '&up=1';
 
     downloadUrl(url, function(data, responseCode)
     {
@@ -188,18 +190,19 @@ function saveData()
 
 function getAddress(latlng)
 {
-    return geocoder.geocode({'location': latlng}, function(results, status)
+    current = "-1";
+    geocoder.geocode({'location': latlng}, function(results, status)
     {
         if (status === 'OK')
         {
             if (results[0])
-                return results[0]["formatted_address"];
+                current = results[0]["formatted_address"];
             else
                 window.alert('No results found');
         }
         else
             window.alert('Geocoder failed due to: ' + status);
-        return "-1";
+
     });
 }
 
