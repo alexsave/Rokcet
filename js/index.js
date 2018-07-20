@@ -176,6 +176,7 @@ function saveData()
 
     var addr = getAddress(latlng);
 
+    alert(current);
     var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + current + '&up=1';
 
     downloadUrl(url, function(data, responseCode)
@@ -202,7 +203,6 @@ function getAddress(latlng)
         }
         else
             window.alert('Geocoder failed due to: ' + status);
-
     });
 }
 
