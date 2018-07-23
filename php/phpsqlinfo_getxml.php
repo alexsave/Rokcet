@@ -1,5 +1,5 @@
 <?php
-require("phpsqlinfo_dbinfo.php");
+require("phpsqlinfo_dbinfo.php", 'UTF-8');
 
 $doc = new DOMDocument("1.0");
 $node = $doc->createElement("events");
@@ -19,7 +19,7 @@ if(!$db_selected)
 
 //get records from within 8 hours
 //$query = "SELECT * FROM events WHERE DATE(time) = CURDATE() OR DATE(time) = DATE(NOW() - INTERVAL 1 Day)";
-$query = "SELECT * FROM events WHERE time BETWEEN UTC_TIMESTAMP() AND UTC_TIMESTAMP() - INTERVAL 8 HOUR;
+$query = "SELECT * FROM events WHERE time BETWEEN UTC_TIMESTAMP() AND UTC_TIMESTAMP() - INTERVAL 8 HOUR";
 $result = mysqli_query($connection, $query);
 if(!$result)
 {
