@@ -1,7 +1,7 @@
 <?php
-require("phpsqlinfo_dbinfo.php", 'UTF-8');
+require("phpsqlinfo_dbinfo.php");
 
-$doc = new DOMDocument("1.0");
+$doc = new DOMDocument("1.0", 'UTF-8');
 $node = $doc->createElement("events");
 $parnode = $doc->appendChild($node);
 
