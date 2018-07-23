@@ -111,10 +111,16 @@ function initMap() {
 
     var heatmapData = [];
 
+    var event = new Date('2018-07-22 17:54:49');
+    console.log(event.toLocaleTimeString('en-US'));
+    console.log(event.toLocaleTimeString('it-IT'));
+
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName('event');
-        Array.prototype.forEach.call(markers, function(markerElem) {
+        Array.prototype.forEach.call(markers, function(markerElem)
+        {
+
             //var id = markerElem.getAttribute('id');
             var name = markerElem.getAttribute('name');
             var address = markerElem.getAttribute('address');
@@ -126,7 +132,7 @@ function initMap() {
             heatmapData.push(point);
         });
 
-        });
+    });
 
     heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
     heatmap.setMap(map);

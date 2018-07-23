@@ -34,6 +34,8 @@ while($row = @mysqli_fetch_assoc($result))
     $newnode->setAttribute("lat", $row['lat']);
     $newnode->setAttribute("lng", $row['lng']);
     $newnode->setAttribute("weight", $row['weight']);
+    $newnode->setAttribute("time", $row['time']);
+    $newnode->setAttribute("addr", $row['addr']);
 }
 
 echo $doc->saveXML();
