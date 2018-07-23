@@ -17,7 +17,9 @@ if(!$db_selected)
     die('Can\'t use db : ' . mysqli_error($connection));
 }
 
-$query = "SELECT * FROM events WHERE 1";
+//get records from within 8 hours
+//$query = "SELECT * FROM events WHERE DATE(time) = CURDATE() OR DATE(time) = DATE(NOW() - INTERVAL 1 Day)";
+$query = "SELECT * FROM events WHERE time BETWEEN UTC_TIMESTAMP() AND UTC_TIMESTAMP() - INTERVAL 8 HOUR;
 $result = mysqli_query($connection, $query);
 if(!$result)
 {

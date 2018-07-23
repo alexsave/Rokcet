@@ -111,9 +111,9 @@ function initMap() {
 
     var heatmapData = [];
 
-    var event = new Date('2018-07-22 17:54:49');
+    /*var event = new Date('2018-07-22 17:54:49');
     console.log(event.toLocaleTimeString('en-US'));
-    console.log(event.toLocaleTimeString('it-IT'));
+    console.log(event.toLocaleTimeString('it-IT'));*/
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
         var xml = data.responseXML;
