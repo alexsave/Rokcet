@@ -181,7 +181,10 @@ function initMap() {
                 fillOpacity: 0.5
             }
         });
+        //make it scroll to the event, zoom in, and
+        //scrolling away will close the menu
         map.setCenter(event.latLng);
+        map.setZoom(18);
 
         //chagne this to somethign cool
         //infowindow.open(map, marker);
@@ -206,6 +209,9 @@ function openMenu(latLng)
     });
 
     document.getElementById("menu").style.display = 'block';
+    var name = document.createElement("a");
+    name.appendChild(document.createTextNode(addr));
+    document.getElementById("menu").appendChild(name);
 
 }
 
