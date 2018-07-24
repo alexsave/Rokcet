@@ -211,7 +211,7 @@ function openMenu(latLng)
     document.getElementById("menu").style.display = 'block';
     /*var name = document.createElement("p");
     name.appendChild(document.createTextNode(addr));*/
-    var name = document.createElement("p").appendChild(document.createTextNode('f'));
+    var name = document.createElement("p").appendChild(document.createTextNode(addr));
     document.getElementById("menu").appendChild(name);
 
 }
