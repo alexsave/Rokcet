@@ -194,7 +194,7 @@ function initMap() {
     });
 }
 
-function openMenu(latLng)
+/*function openMenu(latLng)
 {
     geocoder.geocode({'location': latLng}, function(results, status)
     {
@@ -213,8 +213,32 @@ function openMenu(latLng)
     /*var name = document.createElement("p");
     name.appendChild(document.createTextNode(current));
     //var name = document.createElement("p").appendChild(document.createTextNode(current));
-    document.getElementById("menu").appendChild(name);*/
+    document.getElementById("menu").appendChild(name);
     var name = document.createTextNode(current);
+    document.getElementById("menu").appendChild(name);
+
+}*/
+var cur = "";
+function openMenu(latLng)
+{
+    var addr = "";
+    geocoder.geocode({'location': latLng}, function(results, status)
+    {
+        if(status === 'OK')
+        {
+            if(results[0])
+                cur = results[0]["formatted_address"].split(',')[0];
+            else
+                window.alert('No nearby addresses found');
+        }
+        else
+            window.alert('Search failed due to: ' + status);
+    });
+
+    document.getElementById("menu").style.display = 'block';
+    /*var name = document.createElement("p");
+    name.appendChild(document.createTextNode(addr));*/
+    var name = document.createTextNode(cur);
     document.getElementById("menu").appendChild(name);
 
 }
