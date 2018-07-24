@@ -210,9 +210,11 @@ function openMenu(latLng)
     });
 
     document.getElementById("menu").style.display = 'block';
-    var name = document.createElement("p");
+    /*var name = document.createElement("p");
     name.appendChild(document.createTextNode(current));
     //var name = document.createElement("p").appendChild(document.createTextNode(current));
+    document.getElementById("menu").appendChild(name);*/
+    var name = document.createTextNode(current);
     document.getElementById("menu").appendChild(name);
 
 }
