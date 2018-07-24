@@ -7,8 +7,8 @@ var heatmap;
 
 var geocoder;
 
-var addresses;
-var heat;
+/*var addresses;
+var heat;*/
 
 var addrData;
 
@@ -180,10 +180,33 @@ function initMap() {
                 fillColor: 'red',
                 fillOpacity: 0.5
             }
-        })
+        });
+        map.setCenter(event.latLng);
 
-        infowindow.open(map, marker);
+        //chagne this to somethign cool
+        //infowindow.open(map, marker);
+        openMenu(event.latLng);
     });
+}
+
+function openMenu(latLng)
+{
+    var addr = "";
+    geocoder.geocode({'location': latLng}, function(results, status)
+    {
+        if(status === 'OK')
+        {
+            if(results[0])
+                addr = results[0]["formatted_address"];
+            else
+                window.alert('No nearby addresses found');
+        }
+        else
+            window.alert('Search failed due to: ' + status);
+    });
+
+    document.getElementById("menu").style.display = 'block';
+
 }
 
 function saveData()
@@ -203,7 +226,6 @@ function writeEntry(latlng, results, status)
             a = results[0]["formatted_address"];
         else
             window.alert('No results found');
-
     }
     else
         window.alert('Geocoder failed due to: ' + status);
