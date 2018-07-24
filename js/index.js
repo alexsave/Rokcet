@@ -116,6 +116,8 @@ function initMap() {
     addresses = [];
     heat = [];
 
+    addrData = new Object();
+
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName('event');
