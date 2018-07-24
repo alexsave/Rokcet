@@ -197,7 +197,7 @@ function openMenu(latLng)
         if(status === 'OK')
         {
             if(results[0])
-                addr = results[0]["formatted_address"];
+                addr = results[0]["formatted_address"].split(',')[0];
             else
                 window.alert('No nearby addresses found');
         }
@@ -230,6 +230,7 @@ function writeEntry(latlng, results, status)
     else
         window.alert('Geocoder failed due to: ' + status);
 
+    //-----------------------
     var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + a + '&up=1';
 
     downloadUrl(url, function(data, responseCode) {
