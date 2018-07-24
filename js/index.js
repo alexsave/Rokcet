@@ -209,8 +209,9 @@ function openMenu(latLng)
     });
 
     document.getElementById("menu").style.display = 'block';
-    var name = document.createElement("p");
-    name.appendChild(document.createTextNode(addr));
+    /*var name = document.createElement("p");
+    name.appendChild(document.createTextNode(addr));*/
+    var name = document.createElement("p").appendChild(document.createTextNode('f'));
     document.getElementById("menu").appendChild(name);
 
 }
