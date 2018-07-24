@@ -7,7 +7,8 @@ var heatmap;
 
 var geocoder;
 
-var current;
+var addresses;
+var heat;
 
 function initMap() {
     var durham = {lat: 43.136, lng: -70.926};
@@ -110,26 +111,39 @@ function initMap() {
     map = new google.maps.Map( document.getElementById('map'), mOptions);
 
     var heatmapData = [];
-
-    /*var event = new Date('2018-07-22 17:54:49');
-    console.log(event.toLocaleTimeString('en-US'));
-    console.log(event.toLocaleTimeString('it-IT'));*/
+    addresses = [];
+    heat = [];
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName('event');
         Array.prototype.forEach.call(markers, function(markerElem)
         {
-            var name = markerElem.getAttribute('name');
-            var address = markerElem.getAttribute('address');
-            var weight = markerElem.getAttribute('weight');
             var point = new google.maps.LatLng(
                 parseFloat(markerElem.getAttribute('lat')),
                 parseFloat(markerElem.getAttribute('lng')));
             //heatmapData.push({location: point, weight: weight});
             heatmapData.push(point);
+
+            var address = markerElem.getAttribute('address');
+            var weight = markerElem.getAttribute('weight');
+            //one way to do it
+            //addrData[address] += weight;
+
+            //other way to do it
+            if(addresses.contains(address))
+                heat[addresses.indexOf(address)] += weight;
+            else
+            {
+                addresses.push(address);
+                heat.push(weight);
+            }
+
         });
     });
+
+    alert(addresses);
+    alert(heat);
 
     heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
     heatmap.setMap(map);
