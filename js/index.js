@@ -12,6 +12,8 @@ var heat;*/
 
 var addrData;
 
+var current = "";
+
 function initMap() {
     var durham = {lat: 43.136, lng: -70.926};
 
@@ -194,13 +196,12 @@ function initMap() {
 
 function openMenu(latLng)
 {
-    var addr = "";
     geocoder.geocode({'location': latLng}, function(results, status)
     {
         if(status === 'OK')
         {
             if(results[0])
-                addr = results[0]["formatted_address"].split(',')[0];
+                current = results[0]["formatted_address"].split(',')[0];
             else
                 window.alert('No nearby addresses found');
         }
@@ -209,9 +210,9 @@ function openMenu(latLng)
     });
 
     document.getElementById("menu").style.display = 'block';
-    /*var name = document.createElement("p");
-    name.appendChild(document.createTextNode(addr));*/
-    var name = document.createElement("p").appendChild(document.createTextNode(addr));
+    var name = document.createElement("p");
+    name.appendChild(document.createTextNode(current));
+    //var name = document.createElement("p").appendChild(document.createTextNode(current));
     document.getElementById("menu").appendChild(name);
 
 }
