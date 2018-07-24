@@ -129,7 +129,7 @@ function initMap() {
             //heatmapData.push({location: point, weight: weight});
             heatmapData.push(point);
 
-            var address =  markerElem.getAttribute('address');
+            var address =  markerElem.getAttribute('address').split(',')[0];
             var weight = parseInt(markerElem.getAttribute('weight'));
             //one way to do it
             if(!addrData[address])
