@@ -10,6 +10,8 @@ var geocoder;
 var addresses;
 var heat;
 
+var addrData;
+
 function initMap() {
     var durham = {lat: 43.136, lng: -70.926};
 
@@ -128,22 +130,22 @@ function initMap() {
             var address =  markerElem.getAttribute('address');
             var weight = parseInt(markerElem.getAttribute('weight'));
             //one way to do it
-            //addrData[address] += weight;
+            addrData[address] += weight;
 
             //other way to do it
-            if(addresses.indexOf(address) !== -1)
+            /*if(addresses.indexOf(address) !== -1)
                 heat[addresses.indexOf(address)] += weight;
             else
             {
                 addresses.push(address);
                 heat.push(weight);
-            }
+            }*/
 
         });
     });
 
-    alert(addresses);
-    alert(heat);
+    /*alert(addresses);
+    alert(heat);*/
 
     heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
     heatmap.setMap(map);
