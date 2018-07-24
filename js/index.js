@@ -130,7 +130,10 @@ function initMap() {
             var address =  markerElem.getAttribute('address');
             var weight = parseInt(markerElem.getAttribute('weight'));
             //one way to do it
-            addrData[address] += weight;
+            if(!addrData[address])
+                addrData[address] = weight;
+            else
+                addrData[address] += weight;
 
             //other way to do it
             /*if(addresses.indexOf(address) !== -1)
