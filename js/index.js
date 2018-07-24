@@ -120,8 +120,6 @@ function initMap() {
         var markers = xml.documentElement.getElementsByTagName('event');
         Array.prototype.forEach.call(markers, function(markerElem)
         {
-
-            //var id = markerElem.getAttribute('id');
             var name = markerElem.getAttribute('name');
             var address = markerElem.getAttribute('address');
             var weight = markerElem.getAttribute('weight');
@@ -131,7 +129,6 @@ function initMap() {
             //heatmapData.push({location: point, weight: weight});
             heatmapData.push(point);
         });
-
     });
 
     heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
