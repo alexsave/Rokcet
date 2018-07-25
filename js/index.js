@@ -190,7 +190,8 @@ function initMap() {
 
         //chagne this to somethign cool
         //infowindow.open(map, marker);
-        openMenu(event.latLng);
+        //openMenu(event.latLng);
+        codeCoor(event.latLng, openMenu);
     });
 }
 
@@ -219,9 +220,9 @@ function initMap() {
 
 }*/
 var cur = "";
-function openMenu(latLng)
+function openMenu()
 {
-    var addr = "";
+    /*var addr = "";
     geocoder.geocode({'location': latLng}, function(results, status)
     {
         if(status === 'OK')
@@ -233,14 +234,38 @@ function openMenu(latLng)
         }
         else
             window.alert('Search failed due to: ' + status);
-    });
+    });*/
 
-    document.getElementById("menu").style.display = 'block';
     /*var name = document.createElement("p");
     name.appendChild(document.createTextNode(addr));*/
+    //cur = "test";
     var name = document.createTextNode(cur);
     document.getElementById("menu").appendChild(name);
+    document.getElementById("menu").style.display = 'block';
 
+}
+
+function codeCoor(latLng, callback) {
+    var addr = "";
+    geocoder.geocode({'location': latLng}, function (results, status) {
+        if (status === 'OK') {
+            if (results[0]) {
+                cur = results[0]["formatted_address"].split(',')[0];
+                callback();
+            }
+            else
+                window.alert('No nearby addresses found');
+        }
+        else
+            window.alert('Search failed due to: ' + status);
+    });
+
+    /*var name = document.createElement("p");
+    name.appendChild(document.createTextNode(addr));*/
+    //cur = "test";
+    /*var name = document.createTextNode(cur);
+    document.getElementById("menu").appendChild(name);
+    document.getElementById("menu").style.display = 'block';*/
 }
 
 function saveData()
