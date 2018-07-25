@@ -185,7 +185,8 @@ function initMap() {
         });
         //make it scroll to the event, zoom in, and
         //scrolling away will close the menu
-        map.setCenter(event.latLng);
+        //map.setCenter(event.latLng);
+        map.panTo(event.latLng);
         map.setZoom(18);
 
         //chagne this to somethign cool
@@ -239,10 +240,27 @@ function openMenu()
     /*var name = document.createElement("p");
     name.appendChild(document.createTextNode(addr));*/
     //cur = "test";
-    var name = document.createTextNode(cur);
-    document.getElementById("menu").appendChild(name);
-    document.getElementById("menu").style.display = 'block';
 
+    var menu = document.getElementById("menu");
+
+    var name = document.createTextNode(cur);
+    var up, down;
+    if(addrData[cur])
+    {
+        up = document.createTextNode(addrData[cur].up);
+        down = document.createTextNode(addrData[cur].down);
+    }
+    else
+    {
+        up = document.createTextNode("0");
+        down = document.createTextNode("0");
+    }
+
+    menu.appendChild(name);
+    menu.appendChild(up);
+    menu.appendChild(down);
+
+    document.getElementById("menu").style.display = 'block';
 }
 
 function codeCoor(latLng, callback) {
