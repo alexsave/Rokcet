@@ -4,6 +4,7 @@ body, html, #map
     width: 100%;
     background-color: #003591;
     margin: 0;
+    font-family: "Lucida Console", Monaco, monospace;
 }
 
 #map {
@@ -35,4 +36,20 @@ body, html, #map
     left: 5px;
     bottom: 0;
     border-radius: 15px 15px 0 0;
+    color: white;
+    padding: 0 15px;
+}
+
+#input, #up, #down {
+    display: flex;
+}
+
+#input *
+{
+    width: 50%;
+}
+
+#uparrow, #downarrow
+{
+    text-align: right;
 }

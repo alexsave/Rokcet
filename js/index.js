@@ -102,7 +102,7 @@ function initMap() {
                 featureType: 'water',
                 elementType: 'labels.text.fill',
                 stylers: [{color: '#515c6d'}]
-            },
+           },
             {
                 featureType: 'water',
                 elementType: 'labels.text.stroke',
@@ -120,6 +120,7 @@ function initMap() {
 
     addrData = new Object();
 
+    //SWITCH THIS TO USE JSON
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName('event');
@@ -223,45 +224,90 @@ function initMap() {
 var cur = "";
 function openMenu()
 {
-    /*var addr = "";
-    geocoder.geocode({'location': latLng}, function(results, status)
-    {
-        if(status === 'OK')
-        {
-            if(results[0])
-                cur = results[0]["formatted_address"].split(',')[0];
-            else
-                window.alert('No nearby addresses found');
-        }
-        else
-            window.alert('Search failed due to: ' + status);
-    });*/
-
-    /*var name = document.createElement("p");
-    name.appendChild(document.createTextNode(addr));*/
-    //cur = "test";
-
     var menu = document.getElementById("menu");
+    /*while(menu.firstChild)
+    {
+        menu.removeChild(menu.firstChild);
+    }*/
 
-    var name = document.createTextNode(cur);
+
+    setElemText("title", cur);
+    setElemText("desc", "description here");
+
     var up, down;
     if(addrData[cur])
     {
-        up = document.createTextNode(addrData[cur].up);
-        down = document.createTextNode(addrData[cur].down);
+        up = addrData[cur].up;
+        down = addrData[cur].down;
     }
-    else
-    {
-        up = document.createTextNode("0");
-        down = document.createTextNode("0");
+    else {
+        up = "0";
+        down = "0";
     }
 
+    setElemText("upvalue", up);
+    setElemText("downvalue", down);
+
+    /*var name = document.createElement("h1")
+    name.appendChild(document.createTextNode(cur));
     menu.appendChild(name);
-    menu.appendChild(up);
-    menu.appendChild(down);
 
-    document.getElementById("menu").style.display = 'block';
+    name = document.createElement("p");
+    name.appendChild(document.createTextNode("description"));
+    menu.appendChild(name);
+
+    var input = document.createElement("div");
+
+    }
+
+    var a = document.createElement("div");
+    var b = document.createElement("div");
+
+    var uparrow = document.createElement("div");
+    var downarrow = document.createElement("div");
+
+    uparrow.appendChild(document.createTextNode("^"));
+    downarrow.appendChild(document.createTextNode("v"));
+
+    uparrow.style.color = 'green';
+    downarrow.style.color = 'red';
+
+    var upvalue = document.createElement("div");
+    var downvalue = document.createElement("div");
+
+    upvalue.appendChild(document.createTextNode(up));
+    downvalue.appendChild(document.createTextNode(down));
+
+    a.appendChild(uparrow);
+    a.appendChild(upvalue);
+
+    b.appendChild(downarrow);
+    b.appendChild(downvalue);
+
+    input.appendChild(a);
+    input.appendChild(b);
+
+    input.style.display = 'flex';
+    menu.appendChild(input);
+    /*menu.appendChild(name);
+    menu.appendChild(up);
+    menu.appendChild(down);*/
+
+    menu.style.display = 'block';
+    //document.getElementById("menu").style.display = 'block';*/
 }
+
+//clear all children and set inner textnode to some text
+function setElemText(id, text)
+{
+    var elem = document.getElementById(id);
+
+    while(elem.firstChild)
+        elem.removeChild(elem.firstChild);
+
+    elem.appendChild(document.createTextNode(text));
+}
+
 
 function codeCoor(latLng, callback) {
     var addr = "";
