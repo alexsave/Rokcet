@@ -4,15 +4,14 @@ var infowindow;
 var messagewindow;
 
 var heatmap;
+var heatmapData;
 
 var geocoder;
 
-/*var addresses;
-var heat;*/
-
 var addrData;
 
-var current = "";
+var cur = "";
+var status = 0;
 
 function initMap() {
     var durham = {lat: 43.136, lng: -70.926};
@@ -114,7 +113,7 @@ function initMap() {
 
     map = new google.maps.Map( document.getElementById('map'), mOptions);
 
-    var heatmapData = [];
+    heatmapData = [];
     addresses = [];
     heat = [];
 
@@ -197,39 +196,10 @@ function initMap() {
     });
 }
 
-/*function openMenu(latLng)
-{
-    geocoder.geocode({'location': latLng}, function(results, status)
-    {
-        if(status === 'OK')
-        {
-            if(results[0])
-                current = results[0]["formatted_address"].split(',')[0];
-            else
-                window.alert('No nearby addresses found');
-        }
-        else
-            window.alert('Search failed due to: ' + status);
-    });
-
-    document.getElementById("menu").style.display = 'block';
-    /*var name = document.createElement("p");
-    name.appendChild(document.createTextNode(current));
-    //var name = document.createElement("p").appendChild(document.createTextNode(current));
-    document.getElementById("menu").appendChild(name);
-    var name = document.createTextNode(current);
-    document.getElementById("menu").appendChild(name);
-
-}*/
-var cur = "";
 function openMenu()
 {
+    status = 0;
     var menu = document.getElementById("menu");
-    /*while(menu.firstChild)
-    {
-        menu.removeChild(menu.firstChild);
-    }*/
-
 
     setElemText("title", cur);
     setElemText("desc", "description here");
@@ -248,53 +218,52 @@ function openMenu()
     setElemText("upvalue", up);
     setElemText("downvalue", down);
 
-    /*var name = document.createElement("h1")
-    name.appendChild(document.createTextNode(cur));
-    menu.appendChild(name);
-
-    name = document.createElement("p");
-    name.appendChild(document.createTextNode("description"));
-    menu.appendChild(name);
-
-    var input = document.createElement("div");
-
-    }
-
-    var a = document.createElement("div");
-    var b = document.createElement("div");
-
-    var uparrow = document.createElement("div");
-    var downarrow = document.createElement("div");
-
-    uparrow.appendChild(document.createTextNode("^"));
-    downarrow.appendChild(document.createTextNode("v"));
-
-    uparrow.style.color = 'green';
-    downarrow.style.color = 'red';
-
-    var upvalue = document.createElement("div");
-    var downvalue = document.createElement("div");
-
-    upvalue.appendChild(document.createTextNode(up));
-    downvalue.appendChild(document.createTextNode(down));
-
-    a.appendChild(uparrow);
-    a.appendChild(upvalue);
-
-    b.appendChild(downarrow);
-    b.appendChild(downvalue);
-
-    input.appendChild(a);
-    input.appendChild(b);
-
-    input.style.display = 'flex';
-    menu.appendChild(input);
-    /*menu.appendChild(name);
-    menu.appendChild(up);
-    menu.appendChild(down);*/
-
+    document.getElementById("up").style.backgroundColor = 'inherit';
+    document.getElementById("down").style.backgroundColor = 'inherit';
     menu.style.display = 'block';
-    //document.getElementById("menu").style.display = 'block';*/
+}
+
+function up() {
+    //update the button color
+    //update the value in text
+    //make new heatpoint
+    //save to mysql
+    //update the value in addrData (savedata will take care of that, because we have to wait for address)
+    //update status
+    if(status === "1")
+    {}
+    else
+    {
+        document.getElementById("up").style.backgroundColor = 'green';
+        if(status === "-1")
+            document.getElementById("down").style.backgroundColor = 'inherit';
+
+        setElemText("upvalue", parseInt(document.getElementById('upvalue').innerText) + 1);
+
+        heatmapData.push(marker.getPosition());
+        heatmap.setMap(map);
+        saveData(1);
+        status = 1;
+    }
+}
+
+function down()
+{
+    if(status === "-1")
+    {}
+    else
+    {
+        document.getElementById("down").style.backgroundColor = 'red';
+        if(status === "1")
+            document.getElementById("down").style.backgroundColor = 'inherit';
+
+        setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) - 1);
+
+        heatmapData.push(marker.getPosition());
+        heatmap.setMap(map);
+        saveData(-1);
+        status = -1;
+    }
 }
 
 //clear all children and set inner textnode to some text
@@ -332,16 +301,16 @@ function codeCoor(latLng, callback) {
     document.getElementById("menu").style.display = 'block';*/
 }
 
-function saveData()
+function saveData(weight)
 {
     var latlng = marker.getPosition();
     geocoder.geocode({'location': latlng}, function(results, status)
     {
-        writeEntry(latlng,results,status);
+        writeEntry(latlng,weight, results,status);
     });
 }
 
-function writeEntry(latlng, results, status)
+function writeEntry(latlng, weight, results, status)
 {
     var a = "-1";
     if(status === 'OK') {
@@ -354,12 +323,17 @@ function writeEntry(latlng, results, status)
         window.alert('Geocoder failed due to: ' + status);
 
     //-----------------------
-    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + a + '&up=1';
+    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + a + '&up=' + weight;
 
     downloadUrl(url, function(data, responseCode) {
         if (responseCode == 200 && data.responseText.length <= 1) {
-            infowindow.close();
-            messagewindow.open(map, marker);
+            if(!addrData[address])
+                addrData[address] =  {up: 0, down: 0};
+
+            if(weight > 0)
+                addrData[address].up += weight;
+            else
+                addrData[address].down += weight;
         }
     });
 }
