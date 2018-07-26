@@ -14,34 +14,7 @@ var cur = "";
 var status = 0;
 
 function initMap()
-{//SWITCH THIS TO USE JSON
-    downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
-        alert('gotem');
-        var xml = data.responseXML;
-        var markers = xml.documentElement.getElementsByTagName('event');
-        Array.prototype.forEach.call(markers, function(markerElem)
-        {
-            var point = new google.maps.LatLng(
-                parseFloat(markerElem.getAttribute('lat')),
-                parseFloat(markerElem.getAttribute('lng')));
-            //heatmapData.push({location: point, weight: weight});
-            heatmapData.push(point);
-
-            var address =  markerElem.getAttribute('addr').split(',')[0];
-            var weight = parseInt(markerElem.getAttribute('weight'));
-            //one way to do it
-            if(!addrData[address])
-                addrData[address] =  {up: 0, down: 0};
-
-            if(weight > 0)
-                addrData[address].up += weight;
-            else
-                addrData[address].down += weight;
-        });
-
-        heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
-        heatmap.setMap(map);
-    });
+{
 
     var durham = {lat: 43.136, lng: -70.926};
 
@@ -143,10 +116,37 @@ function initMap()
     map = new google.maps.Map( document.getElementById('map'), mOptions);
 
     heatmapData = [];
-    addresses = [];
-    heat = [];
 
     addrData = new Object();
+
+    //SWITCH THIS TO USE JSON
+    downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
+        alert('gotem');
+        var xml = data.responseXML;
+        var markers = xml.documentElement.getElementsByTagName('event');
+        Array.prototype.forEach.call(markers, function(markerElem)
+        {
+            var point = new google.maps.LatLng(
+                parseFloat(markerElem.getAttribute('lat')),
+                parseFloat(markerElem.getAttribute('lng')));
+            //heatmapData.push({location: point, weight: weight});
+            heatmapData.push(point);
+
+            var address =  markerElem.getAttribute('addr').split(',')[0];
+            var weight = parseInt(markerElem.getAttribute('weight'));
+            //one way to do it
+            if(!addrData[address])
+                addrData[address] =  {up: 0, down: 0};
+
+            if(weight > 0)
+                addrData[address].up += weight;
+            else
+                addrData[address].down += weight;
+        });
+
+        heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
+        heatmap.setMap(map);
+    });
 
     geocoder = new google.maps.Geocoder;
 
