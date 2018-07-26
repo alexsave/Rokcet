@@ -40,6 +40,16 @@ body, html, #map
     padding: 0 15px;
 }
 
+#title
+{
+    margin: 10px 0 5px;
+}
+
+#desc
+{
+    margin: 5px 0;
+}
+
 #input, #up, #down {
     display: flex;
 }
@@ -47,9 +57,15 @@ body, html, #map
 #input *
 {
     width: 50%;
+    padding: 0 5px;
 }
 
 #uparrow, #downarrow
 {
     text-align: right;
+}
+
+#input > div
+{
+    box-shadow: 0 1px 4px rgba(0,0,0,.3);
 }
