@@ -121,7 +121,6 @@ function initMap()
 
     //SWITCH THIS TO USE JSON
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
-        alert('gotem');
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName('event');
         Array.prototype.forEach.call(markers, function(markerElem)
