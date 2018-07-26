@@ -327,13 +327,13 @@ function writeEntry(latlng, weight, results, status)
 
     downloadUrl(url, function(data, responseCode) {
         if (responseCode == 200 && data.responseText.length <= 1) {
-            if(!addrData[address])
-                addrData[address] =  {up: 0, down: 0};
+            if(!addrData[a])
+                addrData[a] =  {up: 0, down: 0};
 
             if(weight > 0)
-                addrData[address].up += weight;
+                addrData[a].up += weight;
             else
-                addrData[address].down += weight;
+                addrData[a].down += weight;
         }
     });
 }
