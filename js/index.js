@@ -255,7 +255,7 @@ function down()
     {
         document.getElementById("down").style.backgroundColor = 'red';
         if(status === "1")
-            document.getElementById("down").style.backgroundColor = 'inherit';
+            document.getElementById("up").style.backgroundColor = 'inherit';
 
         setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) - 1);
 
