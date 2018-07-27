@@ -11,6 +11,8 @@ var addrData;
 var cur = "";
 var status = 0;
 
+var lastTime;
+
 function initMap()
 {
 
@@ -139,6 +141,8 @@ function initMap()
                 addrData[address].up += weight;
             else
                 addrData[address].down += weight;
+
+            lastTime = markerElem.getAttribute('time');
         });
 
         heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
@@ -174,11 +178,11 @@ function initMap()
         codeCoor(event.latLng, openMenu);
     });
 
-    /*var source = new EventSource("php/phpsqlinfo_addrow.php");
+    var source = new EventSource("php/phpsqlinfo_lastrow.php");
     source.onmessage = function(event)
     {
         alert(event.data);
-    };*/
+    };
 }
 
 function openMenu()
