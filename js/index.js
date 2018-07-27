@@ -1,7 +1,5 @@
 var map;
 var marker;
-var infowindow;
-var messagewindow;
 
 var heatmap;
 var heatmapData;
@@ -175,6 +173,12 @@ function initMap()
 
         codeCoor(event.latLng, openMenu);
     });
+
+    var source = new EventSource("php/phpsqlinfo_addrow.php");
+    source.onmessage = function(event)
+    {
+        alert("ladies and gentlemen, we gotem");
+    };
 }
 
 function openMenu()

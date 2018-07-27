@@ -26,10 +26,6 @@ $query = sprintf("INSERT INTO events " .
         mysqli_real_escape_string($connection, $addr),
         mysqli_real_escape_string($connection, $weight));
 
-/*$query = "INSERT INTO events " .
-        " (id, lat, lng, weight) " .
-        " VALUES (NULL, 123.123, 123.123, 1);*/
-
 $result = mysqli_query($connection, $query);
 
 if(!$result)
@@ -37,5 +33,18 @@ if(!$result)
     die('Invalid query: ' . mysqli_error($connection));
 }
 
-?>
+header('Content-Type: text/event-steam');
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
 
+$data['lat'] = $lat;
+$data['lng'] = $lng;
+$data['weight'] = $weight;
+$data['addr'] = $addr;
+
+echo 'data: ' . json_encode($data) . "\n\n";
+ob_flush();
+flush();
+
+?>
