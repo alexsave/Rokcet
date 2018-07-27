@@ -33,18 +33,22 @@ if(!$result)
     die('Invalid query: ' . mysqli_error($connection));
 }
 
-header('Content-Type: text/event-stream');
-header("Cache-Control: no-cache, no-store, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
+if($addr)
+{
 
-$data['lat'] = $lat;
-$data['lng'] = $lng;
-$data['weight'] = $weight;
-$data['addr'] = $addr;
+    header('Content-Type: text/event-stream');
+    header("Cache-Control: no-cache, no-store, must-revalidate");
+    header("Pragma: no-cache");
+    header("Expires: 0");
 
-echo 'data: ' . json_encode($data) . "\n\n";
-ob_flush();
-flush();
+    $data['lat'] = $lat;
+    $data['lng'] = $lng;
+    $data['weight'] = $weight;
+    $data['addr'] = $addr;
+
+    echo 'data: ' . json_encode($data) . "\n\n";
+    ob_flush();
+    flush();
+}
 
 ?>
