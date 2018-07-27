@@ -203,11 +203,11 @@ function initMap()
                 addrData[a].down += parseInt(res['weight']);
 
             //currently open
-            /*if(a === cur)
+            if(a === cur)
             {
                 setElemText("upvalue", addrData[a].up);
                 setElemText("downvalue", addrData[a].down);
-            }*/
+            }
         }
 
     };
