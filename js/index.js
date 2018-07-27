@@ -203,11 +203,11 @@ function initMap()
                 addrData[a].down += parseInt(res['weight']);
 
             //currently open
-            if(a === cur)
+            /*if(a === cur)
             {
                 setElemText("upvalue", addrData[a].up);
                 setElemText("downvalue", addrData[a].down);
-            }
+            }*/
         }
 
     };
@@ -253,6 +253,7 @@ function up() {
         /*if(status === "-1")
             document.getElementById("down").style.backgroundColor = 'inherit';*/
 
+        setElemText("upvalue", parseInt(document.getElementById('upvalue').innerText) + 1);
         /*heatmapData.push(marker.getPosition());
         heatmap.setMap(map);*/
         saveData(1);
@@ -268,6 +269,7 @@ function down()
         /*if(status === "1")
             document.getElementById("up").style.backgroundColor = 'inherit';*/
 
+        setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) - 1);
         /*heatmapData.push(marker.getPosition());
         heatmap.setMap(map);*/
         saveData(-1);
