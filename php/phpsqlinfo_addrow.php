@@ -38,8 +38,8 @@ header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-if($addr)
-{
+//if($addr)
+//{
     $data['lat'] = $lat;
     $data['lng'] = $lng;
     $data['weight'] = $weight;
@@ -48,6 +48,6 @@ if($addr)
     echo 'data: ' . json_encode($data) . "\n\n";
     ob_flush();
     flush();
-}
+//}
 
 ?>
