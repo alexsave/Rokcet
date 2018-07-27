@@ -198,9 +198,9 @@ function initMap()
                 addrData[a] =  {up: 0, down: 0};
 
             if(res['weight'] > 0)
-                addrData[a].up += res['weight'];
+                addrData[a].up += parseInt(res['weight']);
             else
-                addrData[a].down += res['weight'];
+                addrData[a].down += parseInt(res['weight']);
 
             //currently open
             if(a === cur)
