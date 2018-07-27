@@ -179,13 +179,35 @@ function initMap()
     });
 
     var source = new EventSource("php/phpsqlinfo_lastrow.php");
+
+    //very important function, make it its onw
     source.onmessage = function(event)
     {
         var res = JSON.parse(event.data);
 
         if(lastTime && res['time'] !== lastTime)
         {
-            alert(event.data);
+            lastTime = res['time'];
+
+            var point = new google.maps.LatLng( parseFloat(res['lat']), parseFloat(res['lng']));
+            heatmapData.push(point);
+            heatmap.setMap(map);
+
+            var a = res['addr'].split(",")[0];
+            if(!addrData[a])
+                addrData[a] =  {up: 0, down: 0};
+
+            if(res['weight'] > 0)
+                addrData[a].up += res['weight'];
+            else
+                addrData[a].down += res['weight'];
+
+            //currently open
+            if(a === cur)
+            {
+                setElemText("upvalue", addrData[a].up);
+                setElemText("downvalue", addrData[a].down);
+            }
         }
 
     };
@@ -225,18 +247,14 @@ function up() {
     //save to mysql
     //update the value in addrData (savedata will take care of that, because we have to wait for address)
     //update status
-    if(status === "1")
-    {}
-    else
+    if(status === "0")
     {
         document.getElementById("up").style.backgroundColor = 'green';
-        if(status === "-1")
-            document.getElementById("down").style.backgroundColor = 'inherit';
+        /*if(status === "-1")
+            document.getElementById("down").style.backgroundColor = 'inherit';*/
 
-        setElemText("upvalue", parseInt(document.getElementById('upvalue').innerText) + 1);
-
-        heatmapData.push(marker.getPosition());
-        heatmap.setMap(map);
+        /*heatmapData.push(marker.getPosition());
+        heatmap.setMap(map);*/
         saveData(1);
         status = 1;
     }
@@ -244,24 +262,21 @@ function up() {
 
 function down()
 {
-    if(status === "-1")
-    {}
-    else
+    if(status === "0")
     {
         document.getElementById("down").style.backgroundColor = 'red';
-        if(status === "1")
-            document.getElementById("up").style.backgroundColor = 'inherit';
+        /*if(status === "1")
+            document.getElementById("up").style.backgroundColor = 'inherit';*/
 
-        setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) - 1);
-
-        heatmapData.push(marker.getPosition());
-        heatmap.setMap(map);
+        /*heatmapData.push(marker.getPosition());
+        heatmap.setMap(map);*/
         saveData(-1);
         status = -1;
     }
 }
 
 //clear all children and set inner textnode to some text
+//literally use innerhtml
 function setElemText(id, text)
 {
     var elem = document.getElementById(id);
@@ -322,13 +337,13 @@ function writeEntry(latlng, weight, results, status)
 
     downloadUrl(url, function(data, responseCode) {
         if (responseCode == 200 && data.responseText.length <= 1) {
-            if(!addrData[a])
+            /*if(!addrData[a])
                 addrData[a] =  {up: 0, down: 0};
 
             if(weight > 0)
                 addrData[a].up += weight;
             else
-                addrData[a].down += weight;
+                addrData[a].down += weight;*/
         }
     });
 }
