@@ -6,6 +6,11 @@ $lng = $_GET['lng'];
 $weight = $_GET['up'];
 $addr = $_GET['addr'];
 
+/*if(!$addr)
+{
+    die('fuck off');
+}*/
+
 $connection=mysqli_connect("localhost", $username, $password);
 if(!$connection)
 {
@@ -33,21 +38,22 @@ if(!$result)
     die('Invalid query: ' . mysqli_error($connection));
 }
 
-header('Content-Type: text/event-stream');
+/*header('Content-Type: text/event-stream');
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 
 //if($addr)
 //{
-    $data['lat'] = $lat;
-    $data['lng'] = $lng;
-    $data['weight'] = $weight;
-    $data['addr'] = $addr;
+    //$data['lat'] = $lat;
+    //$data['lng'] = $lng;
+    //$data['weight'] = $weight;
+    //$data['addr'] = $addr;
 
-    echo 'data: ' . json_encode($data) . "\n\n";
+    //echo 'data: ' . json_encode($data) . "\n\n";
+    echo 'data: ' . json_encode($_GET) . "\n\n";
     ob_flush();
     flush();
 //}
-
+*/
 ?>

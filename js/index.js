@@ -174,11 +174,11 @@ function initMap()
         codeCoor(event.latLng, openMenu);
     });
 
-    var source = new EventSource("php/phpsqlinfo_addrow.php");
+    /*var source = new EventSource("php/phpsqlinfo_addrow.php");
     source.onmessage = function(event)
     {
         alert(event.data);
-    };
+    };*/
 }
 
 function openMenu()
