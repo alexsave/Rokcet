@@ -181,7 +181,13 @@ function initMap()
     var source = new EventSource("php/phpsqlinfo_lastrow.php");
     source.onmessage = function(event)
     {
-        alert(event.data);
+        var res = JSON.parse(event.data);
+
+        if(lastTime && res['time'] !== lastTime)
+        {
+            alert(event.data);
+        }
+
     };
 }
 
