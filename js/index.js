@@ -177,7 +177,7 @@ function initMap()
     var source = new EventSource("php/phpsqlinfo_addrow.php");
     source.onmessage = function(event)
     {
-        alert("ladies and gentlemen, we gotem");
+        alert(event.data);
     };
 }
 
