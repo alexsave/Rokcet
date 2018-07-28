@@ -234,11 +234,12 @@ function checkLast(event)
         if(parseFloat(res['weight']) > 0) {
             addrData[a].up++;
             heatmapData.push(point);
-            //heatmap.setMap(map);
+            heatmap.setMap(map);
         }
         else {
             addrData[a].down++;
             coolmapData.push(point);
+            coolmap.setMap(map);
         }
 
         //currently open
