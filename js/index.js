@@ -145,7 +145,7 @@ function initMap()
             lastId = markerElem.getAttribute('id');
         });
 
-        heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData, gradient:
+        heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData});/*, gradient:
                 ['rgba(255, 0, 0, 0)',
                 'rgba(255, 255, 0, 0.9)',
                 'rgba(0, 255, 0, 0.7)',
@@ -155,7 +155,7 @@ function initMap()
                 'rgba(0, 0, 238, 0.5)',
                 'rgba(186, 85, 211, 0.7)',
                 'rgba(255, 0, 255, 0.9)',
-                'rgba(255, 0, 0, 1)'] });
+                'rgba(255, 0, 0, 1)'] });*/
         heatmap.setMap(map);
     });
 
