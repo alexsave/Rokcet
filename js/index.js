@@ -181,7 +181,10 @@ function initMap()
     var source = new EventSource("php/phpsqlinfo_lastrow.php");
 
     //very important function, make it its onw
-    source.onmessage = function(event)
+    source.onmessage = function(event) {
+        checkLast(event)
+    };
+    /*source.onmessage = function(event)
     {
         var res = JSON.parse(event.data);
 
@@ -210,8 +213,39 @@ function initMap()
             }
         }
 
-    };
+    };*/
 }
+
+function checkLast(event)
+{
+    var res = JSON.parse(event.data);
+
+    if(lastId && res['id'] !== lastId)
+    {
+        lastId = res['id'];
+
+        var point = new google.maps.LatLng( parseFloat(res['lat']), parseFloat(res['lng']));
+        heatmapData.push(point);
+        heatmap.setMap(map);
+
+        var a = res['addr'].split(",")[0];
+        if(!addrData[a])
+            addrData[a] =  {up: 0, down: 0};
+
+        if(res['weight'] > 0)
+            addrData[a].up += parseInt(res['weight']);
+        else
+            addrData[a].down += parseInt(res['weight']);
+
+        //currently open
+        if(a === cur)
+        {
+            setElemText("upvalue", addrData[a].up);
+            setElemText("downvalue", addrData[a].down);
+        }
+    }
+}
+
 
 function openMenu()
 {
