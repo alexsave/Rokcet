@@ -2,7 +2,10 @@ var map;
 var marker;
 
 var heatmap;
+var coolmap;
+
 var heatmapData;
+var coolmapData;
 
 var geocoder;
 
@@ -116,6 +119,7 @@ function initMap()
     map = new google.maps.Map( document.getElementById('map'), mOptions);
 
     heatmapData = [];
+    coolmapData = [];
 
     addrData = new Object();
 
@@ -123,27 +127,27 @@ function initMap()
     downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName('event');
-        Array.prototype.forEach.call(markers, function(markerElem)
-        {
+        Array.prototype.forEach.call(markers, function(markerElem) {
             var weight = parseInt(markerElem.getAttribute('weight'));
-            var point = new google.maps.LatLng(
-                parseFloat(markerElem.getAttribute('lat')),
-                parseFloat(markerElem.getAttribute('lng')));
-            heatmapData.push({location: point, weight: weight});
-            //heatmapData.push(point);
+            var point = new google.maps.LatLng( parseFloat(markerElem.getAttribute('lat')), parseFloat(markerElem.getAttribute('lng')));
 
-            var address =  markerElem.getAttribute('addr').split(',')[0];
+            var address = markerElem.getAttribute('addr').split(',')[0];
             //one way to do it
-            if(!addrData[address])
-                addrData[address] =  {up: 0, down: 0};
+            if (!addrData[address])
+                addrData[address] = {up: 0, down: 0};
 
-            if(weight !== 0)
+            if (weight > 0) {
                 addrData[address].up++;
-            else
+                heatmapData.push(point);
+            }
+            else {
                 addrData[address].down++;
+                coolmapData.push(point);
+            }
 
             lastId = markerElem.getAttribute('id');
         });
+
 
         heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData});/*, gradient:
                 ['rgba(255, 0, 0, 0)',
@@ -156,7 +160,24 @@ function initMap()
                 'rgba(186, 85, 211, 0.7)',
                 'rgba(255, 0, 255, 0.9)',
                 'rgba(255, 0, 0, 1)'] });*/
+        coolmap = new google.maps.visualization.HeatmapLayer({data: coolmapData, gradient:
+        ['rgba(0, 255, 255, 0)',
+            'rgba(0, 255, 255, 1)',
+            'rgba(0, 191, 255, 1)',
+            'rgba(0, 127, 255, 1)',
+            'rgba(0, 63, 255, 1)',
+            'rgba(0, 0, 255, 1)',
+            'rgba(0, 0, 223, 1)',
+            'rgba(0, 0, 191, 1)',
+            'rgba(0, 0, 159, 1)',
+            'rgba(0, 0, 127, 1)',
+            'rgba(63, 0, 91, 1)',
+            'rgba(127, 0, 63, 1)',
+            'rgba(191, 0, 31, 1)',
+            'rgba(255, 0, 0, 1)']});
+
         heatmap.setMap(map);
+        coolmap.setMap(map);
     });
 
     geocoder = new google.maps.Geocoder;
@@ -205,17 +226,20 @@ function checkLast(event)
         lastId = res['id'];
 
         var point = new google.maps.LatLng( parseFloat(res['lat']), parseFloat(res['lng']));
-        heatmapData.push({location: point, weight: parseFloat(res['weight'])});
-        heatmap.setMap(map);
 
         var a = res['addr'].split(",")[0];
         if(!addrData[a])
             addrData[a] =  {up: 0, down: 0};
 
-        if(parseFloat(res['weight']) !== 0)
+        if(parseFloat(res['weight']) > 0) {
             addrData[a].up++;
-        else
+            heatmapData.push(point);
+            //heatmap.setMap(map);
+        }
+        else {
             addrData[a].down++;
+            coolmapData.push(point);
+        }
 
         //currently open
         if(a === cur)
@@ -286,7 +310,7 @@ function down()
         setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) - 1);
         /*heatmapData.push(marker.getPosition());
         heatmap.setMap(map);*/
-        saveData(0);
+        saveData(-1);
         status = -1;
     }
 }
