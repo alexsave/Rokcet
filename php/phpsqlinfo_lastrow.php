@@ -34,6 +34,7 @@ while($row = @mysqli_fetch_assoc($result))
     $data['weight'] = $row['weight'];
     $data['time'] = $row['time'];
     $data['addr'] = $row['addr'];
+    $data['id'] = $row['id'];
 }
 
 echo 'data: ' . json_encode($data) . "\n\n";

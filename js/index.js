@@ -11,7 +11,7 @@ var addrData;
 var cur = "";
 var status = 0;
 
-var lastTime;
+var lastId;
 
 function initMap()
 {
@@ -142,7 +142,7 @@ function initMap()
             else
                 addrData[address].down += weight;
 
-            lastTime = markerElem.getAttribute('time');
+            lastId = markerElem.getAttribute('id');
         });
 
         heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
@@ -185,9 +185,9 @@ function initMap()
     {
         var res = JSON.parse(event.data);
 
-        if(lastTime && res['time'] !== lastTime)
+        if(lastId && res['id'] !== lastId)
         {
-            lastTime = res['time'];
+            lastId = res['id'];
 
             var point = new google.maps.LatLng( parseFloat(res['lat']), parseFloat(res['lng']));
             heatmapData.push(point);
