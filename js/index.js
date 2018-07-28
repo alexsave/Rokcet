@@ -182,7 +182,7 @@ function initMap()
 
     //very important function, make it its onw
     source.onmessage = function(event) {
-        checkLast(event)
+        checkLast(event);
     };
     /*source.onmessage = function(event)
     {
