@@ -57,7 +57,7 @@ body, html, #map
 #input *
 {
     width: 50%;
-    padding: 0 5px;
+    padding: 5px;
 }
 
 #uparrow, #downarrow
