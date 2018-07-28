@@ -137,15 +137,25 @@ function initMap()
             if(!addrData[address])
                 addrData[address] =  {up: 0, down: 0};
 
-            if(weight > 0)
-                addrData[address].up += weight;
+            if(weight !== 0)
+                addrData[address].up++;
             else
-                addrData[address].down += weight;
+                addrData[address].down++;
 
             lastId = markerElem.getAttribute('id');
         });
 
-        heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
+        heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData, gradient:
+                ['rgba(255, 0, 0, 0)',
+                'rgba(255, 255, 0, 0.9)',
+                'rgba(0, 255, 0, 0.7)',
+                'rgba(173, 255, 47, 0.5)',
+                'rgba(152, 251, 152, 0)',
+                'rgba(152, 251, 152, 0)',
+                'rgba(0, 0, 238, 0.5)',
+                'rgba(186, 85, 211, 0.7)',
+                'rgba(255, 0, 255, 0.9)',
+                'rgba(255, 0, 0, 1)'] });
         heatmap.setMap(map);
     });
 
@@ -184,36 +194,6 @@ function initMap()
     source.onmessage = function(event) {
         checkLast(event);
     };
-    /*source.onmessage = function(event)
-    {
-        var res = JSON.parse(event.data);
-
-        if(lastId && res['id'] !== lastId)
-        {
-            lastId = res['id'];
-
-            var point = new google.maps.LatLng( parseFloat(res['lat']), parseFloat(res['lng']));
-            heatmapData.push(point);
-            heatmap.setMap(map);
-
-            var a = res['addr'].split(",")[0];
-            if(!addrData[a])
-                addrData[a] =  {up: 0, down: 0};
-
-            if(res['weight'] > 0)
-                addrData[a].up += parseInt(res['weight']);
-            else
-                addrData[a].down += parseInt(res['weight']);
-
-            //currently open
-            if(a === cur)
-            {
-                setElemText("upvalue", addrData[a].up);
-                setElemText("downvalue", addrData[a].down);
-            }
-        }
-
-    };*/
 }
 
 function checkLast(event)
@@ -232,10 +212,10 @@ function checkLast(event)
         if(!addrData[a])
             addrData[a] =  {up: 0, down: 0};
 
-        if(res['weight'] > 0)
-            addrData[a].up += parseInt(res['weight']);
+        if(res['weight'] !== 0)
+            addrData[a].up++;
         else
-            addrData[a].down += parseInt(res['weight']);
+            addrData[a].down++;
 
         //currently open
         if(a === cur)
@@ -306,7 +286,7 @@ function down()
         setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) - 1);
         /*heatmapData.push(marker.getPosition());
         heatmap.setMap(map);*/
-        saveData(-1);
+        saveData(0);
         status = -1;
     }
 }
@@ -373,13 +353,7 @@ function writeEntry(latlng, weight, results, status)
 
     downloadUrl(url, function(data, responseCode) {
         if (responseCode == 200 && data.responseText.length <= 1) {
-            /*if(!addrData[a])
-                addrData[a] =  {up: 0, down: 0};
-
-            if(weight > 0)
-                addrData[a].up += weight;
-            else
-                addrData[a].down += weight;*/
+            /*[a].down += weight;*/
         }
     });
 }
