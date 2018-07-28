@@ -212,7 +212,7 @@ function checkLast(event)
         if(!addrData[a])
             addrData[a] =  {up: 0, down: 0};
 
-        if(res['weight'] !== 0)
+        if(parseFloat(res['weight']) !== 0)
             addrData[a].up++;
         else
             addrData[a].down++;
