@@ -43,6 +43,7 @@ while($row = @mysqli_fetch_assoc($result))
     $newnode->setAttribute("weight", $row['weight']);
     $newnode->setAttribute("time", $row['time']);
     $newnode->setAttribute("addr", $row['addr']);
+    $newnode->setAttribute("id", $row['id']);
 }
 
 echo $doc->saveXML();
