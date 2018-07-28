@@ -125,14 +125,14 @@ function initMap()
         var markers = xml.documentElement.getElementsByTagName('event');
         Array.prototype.forEach.call(markers, function(markerElem)
         {
+            var weight = parseInt(markerElem.getAttribute('weight'));
             var point = new google.maps.LatLng(
                 parseFloat(markerElem.getAttribute('lat')),
                 parseFloat(markerElem.getAttribute('lng')));
-            //heatmapData.push({location: point, weight: weight});
-            heatmapData.push(point);
+            heatmapData.push({location: point, weight: weight});
+            //heatmapData.push(point);
 
             var address =  markerElem.getAttribute('addr').split(',')[0];
-            var weight = parseInt(markerElem.getAttribute('weight'));
             //one way to do it
             if(!addrData[address])
                 addrData[address] =  {up: 0, down: 0};
@@ -225,7 +225,7 @@ function checkLast(event)
         lastId = res['id'];
 
         var point = new google.maps.LatLng( parseFloat(res['lat']), parseFloat(res['lng']));
-        heatmapData.push(point);
+        heatmapData.push({location: point, weight: res['weight']});
         heatmap.setMap(map);
 
         var a = res['addr'].split(",")[0];
