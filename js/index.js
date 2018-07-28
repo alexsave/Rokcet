@@ -205,7 +205,7 @@ function checkLast(event)
         lastId = res['id'];
 
         var point = new google.maps.LatLng( parseFloat(res['lat']), parseFloat(res['lng']));
-        heatmapData.push({location: point, weight: res['weight']});
+        heatmapData.push({location: point, weight: parseFloat(res['weight'])});
         heatmap.setMap(map);
 
         var a = res['addr'].split(",")[0];
