@@ -372,8 +372,6 @@ function codeCoor(latLng, callback) {
             else
                 window.alert('No nearby addresses found');
         }
-        else
-            window.alert('Search failed due to: ' + status);
     });
 
     /*var name = document.createElement("p");
