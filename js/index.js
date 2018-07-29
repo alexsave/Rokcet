@@ -162,9 +162,8 @@ function initMap()
 
     downloadUrl('php/getdesc.php', function(event)
     {
-
+        alert(event.responseText);
         var res = JSON.parse(event.responseText);
-        alert(res);
 
     });
 
