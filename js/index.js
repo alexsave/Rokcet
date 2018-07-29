@@ -114,7 +114,7 @@ function initMap()
             var address = markerElem.getAttribute('addr').split(',')[0];
             //one way to do it
             if (!addrData[address])
-                addrData[address] = {up: 0, down: 0};
+                addrData[address] = {up: 0, down: 0, info: "Add description"};
 
             if (weight > 0) {
                 addrData[address].up++;
@@ -158,6 +158,13 @@ function initMap()
 
         heatmap.setMap(map);
         coolmap.setMap(map);
+    });
+
+    downloadUrl('php/getdesc.php', function(event)
+    {
+        var res = JSON.parse(event.data);
+        alert(res);
+
     });
 
     geocoder = new google.maps.Geocoder;
