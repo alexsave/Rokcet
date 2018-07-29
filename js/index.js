@@ -164,7 +164,7 @@ function initMap()
     {
         alert(event.responseText);
         var res = JSON.parse(event.responseText);
-
+        alert(res);
     });
 
     geocoder = new google.maps.Geocoder;
