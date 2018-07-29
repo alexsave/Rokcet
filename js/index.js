@@ -15,6 +15,7 @@ var cur = "";
 var status = 0;
 
 var lastId;
+var lastDescTime;
 
 function initMap()
 {
@@ -162,9 +163,17 @@ function initMap()
 
     downloadUrl('php/getdesc.php', function(event)
     {
-        alert(event.responseText);
+        //alert(event.responseText);
         var res = JSON.parse(event.responseText);
-        alert(res[0]['addr']);
+        //alert(res[0]['addr']);
+
+        for(var i = 0; i < res.length; i++)
+        {
+            addrData[res[i]['addr']]['info'] = res[i]['desc'];
+        }
+
+        if(res.length !== 0)
+            lastDescTime = res[0]['time'];
     });
 
     geocoder = new google.maps.Geocoder;
@@ -250,7 +259,7 @@ function openMenu()
     title.innerText = cur;
     title.setAttribute("href", "https://m.uber.com/ul/?action=setPickup&client_id=G_iICjf80han-aBqCiHR0jF9LIKxmtG-&pickup=my_location&dropoff[formatted_address]=" + cur + "&dropoff[latitude]=" + marker.getPosition().lat() + "&dropoff[longitude]=" + marker.getPosition().lng());
     //setElemText("desc", "description here");
-    desc.innerText = "Add description";
+    desc.innerText = addrData[cur]['info'];//"Add description";
     desc.setAttribute("contenteditable", "true");
 
     desc.onclick = function()
