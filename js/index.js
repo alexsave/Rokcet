@@ -254,6 +254,7 @@ function openMenu()
         {
             document.getElementById("desc").setAttribute("contenteditable", "false");
             //add savign code here
+            updateDesc();
         }
     };
 
@@ -274,6 +275,17 @@ function openMenu()
     document.getElementById("up").style.backgroundColor = 'inherit';
     document.getElementById("down").style.backgroundColor = 'inherit';
     menu.style.display = 'block';
+}
+
+function updateDesc()
+{
+    var a = cur;
+    var d = document.getElementById("desc").innerText;
+
+
+    var url = 'php/updatedesc.php?addr=' + a + '&desc=' + d;
+
+    downloadUrl(url, function(data, responseCode) { });
 }
 
 function up() {
