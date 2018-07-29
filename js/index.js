@@ -261,7 +261,8 @@ function openMenu()
     title.innerText = cur;
     title.setAttribute("href", "https://m.uber.com/ul/?action=setPickup&client_id=G_iICjf80han-aBqCiHR0jF9LIKxmtG-&pickup=my_location&dropoff[formatted_address]=" + cur + "&dropoff[latitude]=" + marker.getPosition().lat() + "&dropoff[longitude]=" + marker.getPosition().lng());
     //setElemText("desc", "description here");
-    desc.innerText = addrData[cur]['info'];//"Add description";
+    desc.innerText = addrData[cur] ? addrData[cur]['info'] : "Add description";
+    //desc.innerText = addrData[cur]['info'];//"Add description";
     desc.setAttribute("contenteditable", "true");
 
     desc.onclick = function()
