@@ -305,6 +305,10 @@ function updateDesc()
     var a = cur;
     var d = document.getElementById("desc").innerText;
 
+    if (!addrData[a])
+        addrData[a] = {up: 0, down: 0, info: "Add description"};
+    addrData[a]['info'] = d;
+
 
     var url = 'php/updatedesc.php?addr=' + a + '&desc=' + d;
 
