@@ -20,7 +20,6 @@ if(!$result)
     die('Invalid query: ' . mysqli_error($connection));
 }
 
-header('Content-Type: text/event-stream');
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
@@ -32,7 +31,7 @@ while($row = @mysqli_fetch_assoc($result))
     $data[] = array('addr' => $row['addr'], 'desc' => $row['info'], 'time' => $row['time']);
 }
 
-echo 'data: ' . json_encode($data) . "\n\n";
+echo json_encode($data);
 ob_flush();
 flush();
 
