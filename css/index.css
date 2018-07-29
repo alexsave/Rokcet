@@ -31,7 +31,7 @@ body, html, #map
     position: absolute;
     box-shadow: 0 1px 4px rgba(0,0,0,.3);
     z-index: 2;
-    height: 200px;
+    height: 150px;
     right: 5px;
     left: 5px;
     bottom: 0;
