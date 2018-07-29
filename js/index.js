@@ -240,7 +240,7 @@ function openMenu()
     document.getElementById("title").innerText = cur;
     document.getElementById("title").setAttribute("href", "https://m.uber.com/ul/?action=setPickup&client_id=G_iICjf80han-aBqCiHR0jF9LIKxmtG-&pickup=my_location&dropoff[formatted_address]=" + cur + "&dropoff[latitude]=" + marker.getPosition().lat() + "&dropoff[longitude]=" + marker.getPosition().lng());
     //setElemText("desc", "description here");
-    document.getElementById("desc").innerText = "description here";
+    document.getElementById("desc").innerText = "Add description";
     document.getElementById("desc").setAttribute("contenteditable", "true");
 
     document.getElementById("desc").onclick = function()

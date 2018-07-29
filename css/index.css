@@ -55,6 +55,11 @@ body, html, #map
     margin: 5px 0;
 }
 
+#desc:focus
+{
+    outline:0;
+}
+
 #input, #up, #down {
     display: flex;
 }
