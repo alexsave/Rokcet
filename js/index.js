@@ -33,24 +33,19 @@ function initMap()
             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
             {
-                featureType: 'administrative.locality',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#d59563'}]
-            },
-            {
                 featureType: 'poi',
                 elementType: 'labels',
                 stylers: [{visibility: "off"}]
             },
             {
-                featureType: 'poi.park',
+                featureType: 'landscape.man_made',
                 elementType: 'geometry',
-                stylers: [{color: '#263c3f'}]
+                styles: [{color: "#99FF33"}]
             },
             {
                 featureType: 'poi.park',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#6b9a76'}]
+                elementType: 'geometry',
+                stylers: [{color: '#263c3f'}]
             },
             {
                 featureType: 'road',
@@ -74,23 +69,18 @@ function initMap()
             },
             {
                 featureType: 'road.highway',
-                elementType: 'geometry.stroke',
-                stylers: [{color: '#1f2835'}]
+                elementType: 'labels.icon',
+                stylers: [{visibility: "off"}]
             },
             {
-                featureType: 'road.highway',
-                elementType: 'labels',
+                featureType: 'road.arterial',
+                elementType: 'labels.icon',
                 stylers: [{visibility: "off"}]
             },
             {
                 featureType: 'water',
                 elementType: 'labels',
                 stylers: [{visibility: "off"}]
-            },
-            {
-                featureType: 'transit',
-                elementType: 'geometry',
-                stylers: [{color: '#2f3948'}]
             },
             {
                 featureType: 'transit.station',
@@ -100,16 +90,6 @@ function initMap()
             {
                 featureType: 'water',
                 elementType: 'geometry',
-                stylers: [{color: '#17263c'}]
-            },
-            {
-                featureType: 'water',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#515c6d'}]
-           },
-            {
-                featureType: 'water',
-                elementType: 'labels.text.stroke',
                 stylers: [{color: '#17263c'}]
             }
         ]
