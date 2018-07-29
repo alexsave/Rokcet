@@ -169,6 +169,8 @@ function initMap()
 
         for(var i = 0; i < res.length; i++)
         {
+            if (!addrData[res[i]['addr']])
+                addrData[res[i]['addr']] = {up: 0, down: 0, info: "Add description"};
             addrData[res[i]['addr']]['info'] = res[i]['desc'];
         }
 
@@ -225,7 +227,7 @@ function checkLast(event)
 
         var a = res['addr'].split(",")[0];
         if(!addrData[a])
-            addrData[a] =  {up: 0, down: 0};
+            addrData[a] = {up: 0, down: 0, info: "Add description"};
 
         if(parseFloat(res['weight']) > 0) {
             addrData[a].up++;
