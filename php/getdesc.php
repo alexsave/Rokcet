@@ -13,7 +13,7 @@ if(!$db_selected)
     die('Can\'t use db : ' . mysqli_error($connection));
 }
 
-$query = "SELECT * FROM `descs` ORDER BY time DESC";
+$query = "SELECT * FROM descs ORDER BY time DESC";
 if(!$result)
 {
     die('Invalid query: ' . mysqli_error($connection));
