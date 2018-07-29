@@ -72,5 +72,17 @@ body, html, #map
 
 #input > div
 {
+    margin: 5px 10px;
     box-shadow: 0 1px 4px rgba(0,0,0,.3);
+    border-style: solid;
+}
+
+#up
+{
+    border-color: #008000;
+}
+
+#down
+{
+    border-color: #800000;
 }

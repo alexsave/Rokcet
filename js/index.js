@@ -285,7 +285,7 @@ function down()
 {
     if(status === "0")
     {
-        document.getElementById("down").style.backgroundColor = 'red';
+        document.getElementById("down").style.backgroundColor = #800000;
         /*if(status === "1")
             document.getElementById("up").style.backgroundColor = 'inherit';*/
 
