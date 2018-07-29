@@ -14,6 +14,7 @@ if(!$db_selected)
 }
 
 $query = "SELECT * FROM descs ORDER BY time DESC";
+$result = mysqli_query($connection, $query);
 if(!$result)
 {
     die('Invalid query: ' . mysqli_error($connection));
