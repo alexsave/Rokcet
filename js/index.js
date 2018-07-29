@@ -274,6 +274,10 @@ function openMenu()
     {
         if(e.key === "Enter")
         {
+            if (!addrData[cur])
+                addrData[cur] = {up: 0, down: 0, info: "Add description"};
+            addrData[cur]['info'] = document.getElementById("desc").innerText;
+
             document.getElementById("desc").setAttribute("contenteditable", "false");
             document.getElementById("desc").onclick = function(){};
             //add savign code here
@@ -304,11 +308,6 @@ function updateDesc()
 {
     var a = cur;
     var d = document.getElementById("desc").innerText;
-
-    if (!addrData[a])
-        addrData[a] = {up: 0, down: 0, info: "Add description"};
-    addrData[a]['info'] = d;
-
 
     var url = 'php/updatedesc.php?addr=' + a + '&desc=' + d;
 
