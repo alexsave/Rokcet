@@ -272,14 +272,15 @@ function openMenu()
 
     desc.onkeypress = function(e)
     {
-        if (!addrData[cur])
-            addrData[cur] = {up: 0, down: 0, info: "Add description"};
-        addrData[cur].info = document.getElementById("desc").innerText;
-
+        alert(e);
         if(e.key === "Enter")
         {
-            document.getElementById("desc").setAttribute("contenteditable", "false");
-            document.getElementById("desc").onclick = function(){};
+            if (!addrData[cur])
+                addrData[cur] = {up: 0, down: 0, info: "Add description"};
+            addrData[cur].info = document.getElementById("desc").innerText;
+
+            desc.setAttribute("contenteditable", "false");
+            desc.onclick = function(){};
             //add savign code here
             updateDesc();
         }
