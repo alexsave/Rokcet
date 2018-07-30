@@ -272,12 +272,12 @@ function openMenu()
 
     desc.onkeypress = function(e)
     {
+        if (!addrData[cur])
+            addrData[cur] = {up: 0, down: 0, info: "Add description"};
+        addrData[cur].info = document.getElementById("desc").innerText;
+
         if(e.key === "Enter")
         {
-            if (!addrData[cur])
-                addrData[cur] = {up: 0, down: 0, info: "Add description"};
-            addrData[cur]['info'] = document.getElementById("desc").innerText;
-
             document.getElementById("desc").setAttribute("contenteditable", "false");
             document.getElementById("desc").onclick = function(){};
             //add savign code here
