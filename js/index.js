@@ -272,12 +272,8 @@ function openMenu()
 
     desc.onkeypress = function(e)
     {
-        alert(e);
         if(e.key === "Enter")
         {
-            if (!addrData[cur])
-                addrData[cur] = {up: 0, down: 0, info: "Add description"};
-            addrData[cur].info = document.getElementById("desc").innerText;
 
             desc.setAttribute("contenteditable", "false");
             desc.onclick = function(){};
@@ -285,6 +281,15 @@ function openMenu()
             updateDesc();
         }
     };
+
+    desc.onfocusout = function(e)
+    {
+
+        desc.setAttribute("contenteditable", "false");
+        desc.onclick = function(){};
+        //add savign code here
+        updateDesc();
+    }
 
     var up, down;
     if(addrData[cur])
@@ -309,6 +314,10 @@ function updateDesc()
 {
     var a = cur;
     var d = document.getElementById("desc").innerText;
+
+    if (!addrData[cur])
+        addrData[cur] = {up: 0, down: 0, info: "Add description"};
+    addrData[cur].info = document.getElementById("desc").innerText;
 
     var url = 'php/updatedesc.php?addr=' + a + '&desc=' + d;
 
