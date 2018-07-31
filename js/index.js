@@ -330,7 +330,7 @@ function checkCookie()
     if(idk === -1)
         return 0;
     else
-        return parseInt(document.cookie.substring(idk + 'submits='.length, idk + 'submits='.length + 1));
+        return parseInt(document.cookie.substring(idk + 'submits='.length, document.cookie.length));
 }
 
 function up() {
