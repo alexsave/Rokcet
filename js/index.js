@@ -448,12 +448,12 @@ function updateCookie()
     var c = 1;
     if(idk !== -1)
     {
+        alert(document.cookie.substring(idk + 'submits='.length, document.cookie.indexOf(';'));
         c = parseInt(document.cookie.substring(idk + 'submits='.length, document.cookie.indexOf(';')));
         c++;
     }
     var t = new Date();
     t.setDate(t.getDate()+1);
-    alert(c);
     document.cookie = 'submits=' + c + ";expires=" + t.toUTCString();
     alert(document.cookie);
 }
