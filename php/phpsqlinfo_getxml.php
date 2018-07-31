@@ -33,9 +33,17 @@ header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 
+$data = array();
+
 while($row = @mysqli_fetch_assoc($result))
 {
-    $node = $doc->createElement("event");
+    $data[] = array("lat" => $row['lat'],
+                    "lng" => $row['lng'],
+                    "weight" => $row['weight'],
+                    "time" => $row['time'],
+                    "addr" => $row['addr'],
+                    "id" => $row['id']);
+    /*$node = $doc->createElement("event");
     $newnode = $parnode->appendChild($node);
 
     $newnode->setAttribute("lat", $row['lat']);
@@ -43,9 +51,12 @@ while($row = @mysqli_fetch_assoc($result))
     $newnode->setAttribute("weight", $row['weight']);
     $newnode->setAttribute("time", $row['time']);
     $newnode->setAttribute("addr", $row['addr']);
-    $newnode->setAttribute("id", $row['id']);
+    $newnode->setAttribute("id", $row['id']);*/
 }
+echo json_encode($data);
+ob_flush();
+flush();
 
-echo $doc->saveXML();
+//echo $doc->saveXML();
 
 ?>

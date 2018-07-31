@@ -105,8 +105,34 @@ function initMap()
     addrData = new Object();
 
     //SWITCH THIS TO USE JSON
-    downloadUrl('php/phpsqlinfo_getxml.php', function(data) {
-        var xml = data.responseXML;
+    downloadUrl('php/phpsqlinfo_getxml.php', function(event) {
+        var res = JSON.parse(event.responseText);
+
+        for(var i = 0; i < res.length; i++)
+        {
+            res[i];
+
+            var weight = parseInt(res[i]["weight"]);
+            var point = new google.maps.LatLng( res[i]["lat"], res[i]["lng"]);
+
+            var address = res[i]["addr"].split(',')[0];
+
+            if (!addrData[address])
+                addrData[address] = {up: 0, down: 0, info: "Add description"};
+
+            if (weight > 0) {
+                addrData[address].up++;
+                heatmapData.push(point);
+            }
+            else {
+                addrData[address].down++;
+                coolmapData.push(point);
+            }
+
+            lastId = res[i]["id"];
+        }
+
+        /*var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName('event');
         Array.prototype.forEach.call(markers, function(markerElem) {
             var weight = parseInt(markerElem.getAttribute('weight'));
@@ -127,7 +153,7 @@ function initMap()
             }
 
             lastId = markerElem.getAttribute('id');
-        });
+        });*/
 
 
         heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData, radius: 20, opacity: 0.7});/*, gradient:
