@@ -324,6 +324,15 @@ function updateDesc()
     downloadUrl(url, function(data, responseCode) { });
 }
 
+function checkCookie()
+{
+    var idk = document.cookie.indexOf('submits=');
+    if(idk === -1)
+        return 0;
+    else
+        return parseInt(document.cookie.substring(idk + 'submits='.length, idk + 'submits='.length + 1));
+}
+
 function up() {
     //update the button color
     //update the value in text
@@ -331,6 +340,11 @@ function up() {
     //save to mysql
     //update the value in addrData (savedata will take care of that, because we have to wait for address)
     //update status
+
+    alert(checkCookie());
+    if(checkCookie() > 4)
+        return;
+
     if(status === "0")
     {
         document.getElementById("up").style.backgroundColor = 'green';
@@ -347,6 +361,9 @@ function up() {
 
 function down()
 {
+    alert(checkCookie());
+    if(checkCookie() > 4)
+        return;
     if(status === "0")
     {
         document.getElementById("down").style.backgroundColor = "#800000";
@@ -422,8 +439,21 @@ function writeEntry(latlng, weight, results, status)
     downloadUrl(url, function(data, responseCode) {
         if (responseCode == 200 && data.responseText.length <= 1) {
             /*[a].down += weight;*/
+            updateCookie();
         }
     });
+}
+
+function updateCookie()
+{
+    var idk = document.cookie.indexOf('submits=');
+    var c = 1;
+    if(idk !== -1)
+    {
+        c = parseInt(document.cookie.substring(idk + 'submits='.length, idk + 'submits='.length + 1));
+        c++;
+    }
+    document.cookie = 'submits=' + c;
 }
 
 function downloadUrl(url, callback)
