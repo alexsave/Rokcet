@@ -130,7 +130,7 @@ function initMap()
         });
 
 
-        heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData});/*, gradient:
+        heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData, radius: 20, opacity: 0.7});/*, gradient:
                 ['rgba(255, 0, 0, 0)',
                 'rgba(255, 255, 0, 0.9)',
                 'rgba(0, 255, 0, 0.7)',
@@ -155,7 +155,7 @@ function initMap()
             'rgba(63, 0, 91, 1)',
             'rgba(127, 0, 63, 1)',
             'rgba(191, 0, 31, 1)',
-            'rgba(255, 0, 0, 1)']});
+            'rgba(255, 0, 0, 1)'], radius: 20, opacity: 0.7});
 
         heatmap.setMap(map);
         coolmap.setMap(map);
@@ -368,7 +368,7 @@ function down()
         /*if(status === "1")
             document.getElementById("up").style.backgroundColor = 'inherit';*/
 
-        setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) - 1);
+        setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) + 1);
         /*heatmapData.push(marker.getPosition());
         heatmap.setMap(map);*/
         saveData(-1);
@@ -435,7 +435,7 @@ function writeEntry(latlng, weight, results, status)
     var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + a + '&up=' + weight;
 
     downloadUrl(url, function(data, responseCode) {
-        if (responseCode == 200 && data.responseText.length <= 1) {
+        if (responseCode === 200 && data.responseText.length <= 1) {
             /*[a].down += weight;*/
             updateCookie();
         }
@@ -464,7 +464,7 @@ function downloadUrl(url, callback)
 
     request.onreadystatechange = function()
     {
-        if(request.readyState == 4)
+        if(request.readyState === 4)
         {
             request.onreadystatechange = doNothing;
             callback(request, request.status);//this line needs to be changed to response xml
