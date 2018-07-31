@@ -448,7 +448,7 @@ function updateCookie()
     var c = 1;
     if(idk !== -1)
     {
-        alert(document.cookie.substring(idk + 'submits='.length, document.cookie.indexOf(';'));
+        alert(document.cookie.substring(idk + 'submits='.length, document.cookie.indexOf(';')));
         c = parseInt(document.cookie.substring(idk + 'submits='.length, document.cookie.indexOf(';')));
         c++;
     }
