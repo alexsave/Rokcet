@@ -341,7 +341,7 @@ function up() {
     //update the value in addrData (savedata will take care of that, because we have to wait for address)
     //update status
 
-    if(checkCookie() > 100)
+    if(checkCookie() > 10)
         return;
 
     if(status === "0")
@@ -360,7 +360,7 @@ function up() {
 
 function down()
 {
-    if(checkCookie() > 4)
+    if(checkCookie() > 10)
         return;
     if(status === "0")
     {
@@ -448,10 +448,12 @@ function updateCookie()
     var c = 1;
     if(idk !== -1)
     {
-        c = parseInt(document.cookie.substring(idk + 'submits='.length, idk + 'submits='.length + 1));
+        c = parseInt(document.cookie.substring(idk + 'submits='.length, document.cookie.indexOf(';')));
         c++;
     }
-    document.cookie = 'submits=' + c;
+    var t = new Date();
+    t.setDate(t.getDate()+1);
+    document.cookie = 'submits=' + c + ";expires=" + t.toUTCString();
 }
 
 function downloadUrl(url, callback)
