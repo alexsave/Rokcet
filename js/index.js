@@ -341,8 +341,7 @@ function up() {
     //update the value in addrData (savedata will take care of that, because we have to wait for address)
     //update status
 
-    alert(checkCookie());
-    if(checkCookie() > 4)
+    if(checkCookie() > 100)
         return;
 
     if(status === "0")
@@ -361,7 +360,6 @@ function up() {
 
 function down()
 {
-    alert(checkCookie());
     if(checkCookie() > 4)
         return;
     if(status === "0")
