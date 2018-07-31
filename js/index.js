@@ -447,17 +447,20 @@ function writeEntry(latlng, weight, results, status)
 function updateCookie()
 {
     var idk = document.cookie.indexOf('submits=');
-    var c = 1;
-    if(idk !== -1)
+    if(idk === -1)
+    {
+        var t = new Date();
+        //t.setDate(t.getDate()+1);
+        t.setTime(t.getTime() + (8*60*60*1000));
+        document.cookie = "submits=1;expires=" + t.toUTCString();
+    }
+    else
     {
         //alert(document.cookie.substring(idk + 'submits='.length, document.cookie.indexOf(';')));
-        c = parseInt(document.cookie.substring(idk + 'submits='.length, document.cookie.length));
+        var c = parseInt(document.cookie.substring(idk + 'submits='.length, document.cookie.length));
         c++;
+        document.cookie = 'submits=' + c;
     }
-    var t = new Date();
-    t.setDate(t.getDate()+1);
-    document.cookie = 'submits=' + c + ";expires=" + t.toUTCString();
-    //alert(document.cookie);
 }
 
 function downloadUrl(url, callback)
