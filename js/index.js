@@ -453,7 +453,9 @@ function updateCookie()
     }
     var t = new Date();
     t.setDate(t.getDate()+1);
+    alert(c);
     document.cookie = 'submits=' + c + ";expires=" + t.toUTCString();
+    alert(document.cookie);
 }
 
 function downloadUrl(url, callback)
