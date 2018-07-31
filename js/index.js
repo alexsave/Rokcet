@@ -132,30 +132,6 @@ function initMap()
             lastId = res[i]["id"];
         }
 
-        /*var xml = data.responseXML;
-        var markers = xml.documentElement.getElementsByTagName('event');
-        Array.prototype.forEach.call(markers, function(markerElem) {
-            var weight = parseInt(markerElem.getAttribute('weight'));
-            var point = new google.maps.LatLng( parseFloat(markerElem.getAttribute('lat')), parseFloat(markerElem.getAttribute('lng')));
-
-            var address = markerElem.getAttribute('addr').split(',')[0];
-            //one way to do it
-            if (!addrData[address])
-                addrData[address] = {up: 0, down: 0, info: "Add description"};
-
-            if (weight > 0) {
-                addrData[address].up++;
-                heatmapData.push(point);
-            }
-            else {
-                addrData[address].down++;
-                coolmapData.push(point);
-            }
-
-            lastId = markerElem.getAttribute('id');
-        });*/
-
-
         heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData, radius: 20, opacity: 0.7});/*, gradient:
                 ['rgba(255, 0, 0, 0)',
                 'rgba(255, 255, 0, 0.9)',
