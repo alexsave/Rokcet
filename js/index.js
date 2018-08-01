@@ -217,6 +217,23 @@ function initMap()
     };
 }
 
+function openSearch()
+{
+    document.getElementById("search").style.display = "none";
+    document.getElementById("searchfield").style.display = "block";
+    document.getElementById("searchfield").setAttribute("contenteditable", "true");
+
+    document.getElementById("searchfield").focusout = function(e)
+    {
+        alert("ok");
+        document.getElementById("search").style.display = "block";
+        document.getElementById("searchfield").style.display = "none";
+    };
+
+    document.getElementById("searchfield").focus();
+
+}
+
 function checkLast(event)
 {
     var res = JSON.parse(event.data);
