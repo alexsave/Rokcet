@@ -22,7 +22,7 @@ if(!$result)
 }
 
 
-$query = "SELECT * FROM desc ORDER BY time DESC LIMIT 1";
+$query = "SELECT * FROM descs ORDER BY time DESC LIMIT 1";
 $result2 = mysqli_query($connection, $query);
 if(!$result2)
 {
