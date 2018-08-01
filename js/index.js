@@ -223,11 +223,12 @@ function openSearch()
     document.getElementById("searchfield").style.display = "block";
     document.getElementById("searchfield").setAttribute("contenteditable", "true");
 
-    document.getElementById("searchfield").focusout = function(e)
+    document.getElementById("searchfield").onkeypress = function(e)
     {
-        alert("ok");
-        document.getElementById("search").style.display = "block";
-        document.getElementById("searchfield").style.display = "none";
+        if(e.key === "Enter") {
+            document.getElementById("search").style.display = "block";
+            document.getElementById("searchfield").style.display = "none";
+        }
     };
 
     document.getElementById("searchfield").focus();
