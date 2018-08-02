@@ -221,9 +221,9 @@ function openSearch()
 {
     document.getElementById("search").style.display = "none";
     document.getElementById("searchfield").style.display = "block";
-    document.getElementById("searchfield").setAttribute("contenteditable", "true");
+    document.getElementById("text").setAttribute("contenteditable", "true");
 
-    document.getElementById("searchfield").onkeypress = function(e)
+    document.getElementById("text").onkeypress = function(e)
     {
         if(e.key === "Enter") {
             document.getElementById("search").style.display = "block";
@@ -231,7 +231,7 @@ function openSearch()
         }
     };
 
-    document.getElementById("searchfield").focus();
+    document.getElementById("text").focus();
 
 }
 
