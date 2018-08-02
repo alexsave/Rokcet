@@ -237,7 +237,9 @@ function openSearch()
 
 function checkLast(event)
 {
-    var res = JSON.parse(event.data);
+    var two = JSON.parse(event.data);
+    var res = two["vote"];
+    var desc = two["desc"];
 
     if(lastId && res['id'] !== lastId)
     {
@@ -266,6 +268,21 @@ function checkLast(event)
             setElemText("upvalue", addrData[a].up);
             setElemText("downvalue", addrData[a].down);
         }
+    }
+
+    if(lastDescTime && desc['time'] !== lastDescTime)
+    {
+        lastDescTime = desc['time'];
+
+        var a = desc['addr'].split(",")[0];
+        if(!addrData[a])
+            addrData[a] = {up: 0, down: 0, info: "Add description"};
+
+        addrData[a].info = desc['info'];
+
+        if(a === cur)
+            document.getElementById("desc").innerText = desc['info'];
+
     }
 }
 
