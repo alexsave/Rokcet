@@ -228,11 +228,42 @@ function openSearch()
         if(e.key === "Enter") {
             document.getElementById("search").style.display = "block";
             document.getElementById("searchfield").style.display = "none";
+
+            if (marker && marker.setMap) {
+                marker.setMap(null);
+            }
+
+            //jesus fuck theres gotta be a better way
+            geocoder.geocode({'address': document.getElementById("text").innerText + " Durham NH"}, function (results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        cur = results[0]["formatted_address"].split(',')[0];
+                        marker = new google.maps.Marker({
+                            position: results[0].geometry.location,
+                            map: map,
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                scale: 2,
+                                strokeColor: 'red',
+                                strokeWeight: 1,
+                                fillColor: 'red',
+                                fillOpacity: 0.5
+                            }
+                        });
+
+                        document.getElementById("text").innerText = "";
+                        map.panTo(results[0].geometry.location);
+                        map.setZoom(18);
+                        openMenu();
+                    }
+                    else
+                        window.alert('No nearby addresses found');
+                }
+            });
         }
     };
 
     document.getElementById("text").focus();
-
 }
 
 function checkLast(event)
