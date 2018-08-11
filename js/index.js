@@ -24,7 +24,8 @@ window.onload = initMap;
 
 function initMap()
 {
-    mymap = L.map('mapid').setView([51.505, -0.09], 13);
+    var durham = {lat: 43.136, lng: -70.926};
+    mymap = L.map('mapid').setView(durham, 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -32,9 +33,8 @@ function initMap()
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
     }).addTo(mymap);
 
-    var durham = {lat: 43.136, lng: -70.926};
 
-    var mOptions =
+    /*var mOptions =
     {
         zoom: 15,
         center: durham,
@@ -107,16 +107,15 @@ function initMap()
             }
         ]
 
-    }
+    }*/
 
-    map = new google.maps.Map( document.getElementById('map'), mOptions);
+    //map = new google.maps.Map( document.getElementById('map'), mOptions);
 
     heatmapData = [];
     coolmapData = [];
 
     addrData = new Object();
 
-    //SWITCH THIS TO USE JSON
     downloadUrl('php/phpsqlinfo_getxml.php', function(event) {
         var res = JSON.parse(event.responseText);
 
@@ -192,9 +191,38 @@ function initMap()
             lastDescTime = res[0]['time'];
     });
 
-    geocoder = new google.maps.Geocoder;
+    //geocoder = new google.maps.Geocoder;
 
-    google.maps.event.addListener(map, "click", function(event)
+
+    mymap.on('click', function(e)
+    {
+        marker = L.circleMarker(e.latlng,
+            {
+                radius: 2,
+                color: 'red',
+                strokeWeight: 1,
+                fillColor: 'red',
+                fillOpacity: 0.5
+            });
+
+        if(marker)
+            marker.addTo(mymap);
+        /*
+        if (marker && marker.setMap) {
+            marker.setMap(null);
+        }*/
+
+        //make it scroll to the event, zoom in, and
+        //scrolling away will close the menu
+        //map.setCenter(event.latLng);
+        /*map.panTo(event.latLng);
+        map.setZoom(18);*/
+
+        codeCoor(e.latlng, openMenu);
+
+    });
+
+    /*google.maps.event.addListener(map, "click", function(event)
     {
         if (marker && marker.setMap) {
             marker.setMap(null);
@@ -219,7 +247,7 @@ function initMap()
         map.setZoom(18);
 
         codeCoor(event.latLng, openMenu);
-    });
+    });*/
 
     var source = new EventSource("php/phpsqlinfo_lastrow.php");
 
