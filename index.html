@@ -3,14 +3,24 @@
     <head>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="css/index.css"/>
-        <script src="js/index.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <script async defer
+        <!--script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArUeQk1WlfjjjzgUqR1i0-s85AqBuIx1Q&libraries=visualization&callback=initMap">
-        </script>
+        </script-->
         <title>Event Finder</title>
         <link rel="icon" type="image/png" href="favicon.png" />
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+              integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+              crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+                integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+                crossorigin=""></script>
+
+        <script src="js/index.js"></script>
     </head>
+
     <body>
         <div id="header">
             <div id="logo">
@@ -26,7 +36,8 @@
             </div>
         </div>
 
-        <div id="map"></div>
+        <!--div id="map"></div-->
+        <div id="mapid"></div>
 
         <div id="menu">
             <a id="title"></a>

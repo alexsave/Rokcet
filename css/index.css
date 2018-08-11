@@ -126,3 +126,8 @@ body, html, #map
 {
     outline: none;
 }
+
+#mapid
+{
+    height: 100%;
+}
