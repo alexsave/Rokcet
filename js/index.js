@@ -217,6 +217,7 @@ function initMap()
         //map.setCenter(event.latLng);
         /*map.panTo(event.latLng);
         map.setZoom(18);*/
+        mymap.setView(e.latlng, 18);
 
         codeCoor(e.latlng, openMenu);
 
