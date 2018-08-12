@@ -33,6 +33,8 @@ function initMap()
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
     }).addTo(mymap);
 
+    geocoder = L.Control.geocoder().addTo(mymap);
+
 
     /*var mOptions =
     {
@@ -371,7 +373,7 @@ function openMenu()
     var desc = document.getElementById("desc");
 
     title.innerText = cur;
-    title.setAttribute("href", "https://m.uber.com/ul/?action=setPickup&client_id=G_iICjf80han-aBqCiHR0jF9LIKxmtG-&pickup=my_location&dropoff[formatted_address]=" + cur + "&dropoff[latitude]=" + marker.getPosition().lat() + "&dropoff[longitude]=" + marker.getPosition().lng());
+    title.setAttribute("href", "https://m.uber.com/ul/?action=setPickup&client_id=G_iICjf80han-aBqCiHR0jF9LIKxmtG-&pickup=my_location&dropoff[formatted_address]=" + cur + "&dropoff[latitude]=" + marker.getLatLng().lat + "&dropoff[longitude]=" + marker.getLatLng().lng);
     //setElemText("desc", "description here");
     desc.innerText = addrData[cur] ? addrData[cur]['info'] : "Add description";
     //desc.innerText = addrData[cur]['info'];//"Add description";
@@ -502,8 +504,15 @@ function setElemText(id, text)
 
 
 function codeCoor(latLng, callback) {
-    var addr = "";
-    geocoder.geocode({'location': latLng}, function (results, status) {
+    downloadUrl(" https://nominatim.openstreetmap.org/reverse?format=json&lat=" + latLng.lat + "&lon=" + latLng.lng + "&zoom=18&addressdetails=1", function(results)
+    {
+        //there might be a better way but idk
+        var addr = JSON.parse(results.responseText).display_name;
+        cur = addr.split(',')[0] + addr.split(',')[1];
+        callback();
+    });
+
+    /*geocoder.geocode({'location': latLng}, function (results, status) {
         if (status === 'OK') {
             if (results[0]) {
                 cur = results[0]["formatted_address"].split(',')[0];
@@ -512,7 +521,7 @@ function codeCoor(latLng, callback) {
             else
                 window.alert('No nearby addresses found');
         }
-    });
+    });*/
 
     /*var name = document.createElement("p");
     name.appendChild(document.createTextNode(addr));*/
@@ -524,7 +533,7 @@ function codeCoor(latLng, callback) {
 
 function saveData(weight)
 {
-    var latlng = marker.getPosition();
+    var latlng = marker.getLatLng();
     geocoder.geocode({'location': latlng}, function(results, status)
     {
         writeEntry(latlng,weight, results,status);
