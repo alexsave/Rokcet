@@ -196,6 +196,9 @@ function initMap()
 
     mymap.on('click', function(e)
     {
+        if(marker)
+            mymap.removeLayer(marker);
+
         marker = L.circleMarker(e.latlng,
             {
                 radius: 2,
@@ -205,8 +208,8 @@ function initMap()
                 fillOpacity: 0.5
             });
 
-        if(marker)
-            marker.addTo(mymap);
+        marker.addTo(mymap);
+
         /*
         if (marker && marker.setMap) {
             marker.setMap(null);
