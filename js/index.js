@@ -25,15 +25,15 @@ window.onload = initMap;
 function initMap()
 {
     var durham = {lat: 43.136, lng: -70.926};
-    mymap = L.map('mapid').setView(durham, 13);
+    mymap = L.map('mapid').setView(durham, 15);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
+        minZoom: 14,
         //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
     }).addTo(mymap);
 
-    geocoder = L.Control.geocoder().addTo(mymap);
+    //geocoder = L.Control.geocoder().addTo(mymap);
 
 
     /*var mOptions =
@@ -503,32 +503,27 @@ function setElemText(id, text)
 }
 
 
-function codeCoor(latLng, callback) {
-    downloadUrl(" https://nominatim.openstreetmap.org/reverse?format=json&lat=" + latLng.lat + "&lon=" + latLng.lng + "&zoom=18&addressdetails=1", function(results)
+function codeCoor(latLng, callback)
+{
+    downloadUrl("http://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng , function(results)
+    {
+        results = JSON.parse(results.responseText)['results'];
+        if (results[0])
+        {
+            cur = results[0]["formatted_address"].split(',')[0];
+            callback();
+        }
+        else
+            window.alert('No nearby addresses found');
+    });
+
+    /*downloadUrl(" https://nominatim.openstreetmap.org/reverse?format=json&lat=" + latLng.lat + "&lon=" + latLng.lng + "&zoom=18&addressdetails=1", function(results)
     {
         //there might be a better way but idk
         var addr = JSON.parse(results.responseText).display_name;
         cur = addr.split(',')[0] + addr.split(',')[1];
         callback();
-    });
-
-    /*geocoder.geocode({'location': latLng}, function (results, status) {
-        if (status === 'OK') {
-            if (results[0]) {
-                cur = results[0]["formatted_address"].split(',')[0];
-                callback();
-            }
-            else
-                window.alert('No nearby addresses found');
-        }
     });*/
-
-    /*var name = document.createElement("p");
-    name.appendChild(document.createTextNode(addr));*/
-    //cur = "test";
-    /*var name = document.createTextNode(cur);
-    document.getElementById("menu").appendChild(name);
-    document.getElementById("menu").style.display = 'block';*/
 }
 
 function saveData(weight)
