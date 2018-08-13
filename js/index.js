@@ -198,6 +198,9 @@ function initMap()
 
     mymap.on('click', function(e)
     {
+        if(e.latlng.lat < 43.1 || e.latlng.lat > 43.2 || e.latlng.lng < -71 || e.latlng.lng > -70.9)
+            return;
+
         if(marker)
             mymap.removeLayer(marker);
 
@@ -212,48 +215,12 @@ function initMap()
 
         marker.addTo(mymap);
 
-        /*
-        if (marker && marker.setMap) {
-            marker.setMap(null);
-        }*/
-
         //make it scroll to the event, zoom in, and
         //scrolling away will close the menu
-        //map.setCenter(event.latLng);
-        /*map.panTo(event.latLng);
-        map.setZoom(18);*/
         mymap.setView(e.latlng, 18);
 
         codeCoor(e.latlng, openMenu);
-
     });
-
-    /*google.maps.event.addListener(map, "click", function(event)
-    {
-        if (marker && marker.setMap) {
-            marker.setMap(null);
-        }
-
-        marker = new google.maps.Marker({
-            position: event.latLng,
-            map: map,
-            icon: {
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 2,
-                strokeColor: 'red',
-                strokeWeight: 1,
-                fillColor: 'red',
-                fillOpacity: 0.5
-            }
-        });
-        //make it scroll to the event, zoom in, and
-        //scrolling away will close the menu
-        //map.setCenter(event.latLng);
-        map.panTo(event.latLng);
-        map.setZoom(18);
-
-        codeCoor(event.latLng, openMenu);
-    });*/
 
     var source = new EventSource("php/phpsqlinfo_lastrow.php");
 
