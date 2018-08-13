@@ -193,9 +193,6 @@ function initMap()
             lastDescTime = res[0]['time'];
     });
 
-    //geocoder = new google.maps.Geocoder;
-
-
     mymap.on('click', function(e)
     {
         if(e.latlng.lat < 43.1 || e.latlng.lat > 43.2 || e.latlng.lng < -71 || e.latlng.lng > -70.9)
