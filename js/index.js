@@ -113,9 +113,11 @@ function initMap()
 
     //map = new google.maps.Map( document.getElementById('map'), mOptions);
 
-    heatmapData = [];
-    coolmapData = [];
+    /*heatmapData = [];
+    coolmapData = [];*/
 
+    heatmap = L.heatLayer([], {radius: 25}).addTo(mymap);
+    coolmap = L.heatLayer([], {radius: 25}).addTo(mymap);
     addrData = new Object();
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(event) {
@@ -136,10 +138,12 @@ function initMap()
             if (weight > 0) {
                 addrData[address].up++;
                 heatmapData.push(point);
+                heatmap.addLatLng({lat:res[i]["lat"], lng:res[i]["lng"]});
             }
             else {
                 addrData[address].down++;
                 coolmapData.push(point);
+                coolmap.addLatLng({lat:res[i]["lat"], lng:res[i]["lng"]});
             }
 
             lastId = res[i]["id"];
