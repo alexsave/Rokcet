@@ -526,7 +526,7 @@ function writeEntry(latlng, weight, results, status)
         //window.alert('Geocoder failed due to: ' + status);
 
     //-----------------------
-    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat() + '&lng=' + latlng.lng() + '&addr=' + a + '&up=' + weight;
+    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat + '&lng=' + latlng.lng + '&addr=' + a + '&up=' + weight;
 
     downloadUrl(url, function(data, responseCode) {
         if (responseCode === 200 && data.responseText.length <= 1) {
