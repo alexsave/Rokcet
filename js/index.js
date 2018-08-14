@@ -128,7 +128,7 @@ function initMap()
             res[i];
 
             var weight = parseInt(res[i]["weight"]);
-            var point = new google.maps.LatLng( res[i]["lat"], res[i]["lng"]);
+            //t var point = new google.maps.LatLng( res[i]["lat"], res[i]["lng"]);
 
             var address = res[i]["addr"].split(',')[0];
 
