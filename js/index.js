@@ -116,8 +116,21 @@ function initMap()
     /*heatmapData = [];
     coolmapData = [];*/
 
-    heatmap = L.heatLayer([], {radius: 25}).addTo(mymap);
-    coolmap = L.heatLayer([], {radius: 25}).addTo(mymap);
+    heatmap = L.heatLayer([], {radius: 10, maxZoom: 16, blur: 25, gradient: {
+            0: 'rgba(255, 0, 0, 0)',
+            0.1 : 'rgba(255, 255, 0, 0.9)',
+            0.2 : 'rgba(0, 255, 0, 0.7)',
+            0.3 : 'rgba(173, 255, 47, 0.5)',
+            0.4 : 'rgba(152, 251, 152, 0)',
+            0.5 : 'rgba(152, 251, 152, 0)',
+            0.6 : 'rgba(0, 0, 238, 0.5)',
+            0.7 : 'rgba(186, 85, 211, 0.7)',
+            0.8 : 'rgba(255, 0, 255, 0.9)',
+            0.9 : 'rgba(255, 0, 0, 1)'}
+    }).addTo(mymap);
+//0.3: 'green', 0.5: 'yellow', 0.8: 'orange', 1: 'red'
+
+    coolmap = L.heatLayer([], {radius: 10, maxZoom: 16, blur: 25, gradient: {0.3: 'green', 0.5: 'yellow', 0.8: 'orange', 1: 'red'}}).addTo(mymap);
     addrData = new Object();
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(event) {
