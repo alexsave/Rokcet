@@ -288,21 +288,17 @@ function checkLast(event)
     {
         lastId = res['id'];
 
-        var point = new google.maps.LatLng( parseFloat(res['lat']), parseFloat(res['lng']));
-
         var a = res['addr'].split(",")[0];
         if(!addrData[a])
             addrData[a] = {up: 0, down: 0, info: "Add description"};
 
         if(parseFloat(res['weight']) > 0) {
             addrData[a].up++;
-            heatmapData.push(point);
-            heatmap.setMap(map);
+            heatmap.addLatLng([res["lat"], res["lng"]]);
         }
         else {
             addrData[a].down++;
-            coolmapData.push(point);
-            coolmap.setMap(map);
+            coolmap.addLatLng([res["lat"], res["lng"]]);
         }
 
         //currently open
