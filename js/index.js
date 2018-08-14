@@ -496,13 +496,13 @@ function codeCoor(latLng, callback)
 
 function saveData(weight)
 {
-    var latlng = marker.getLatLng();
+    var latLng = marker.getLatLng();
 
     downloadUrl("http://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng , function(results)
     {
         results = JSON.parse(results.responseText)['results'];
         if (results[0])
-            writeEntry(latlng, weight, results, status);
+            writeEntry(latLng, weight, results, status);
         else
             window.alert('No nearby addresses found');
     });
