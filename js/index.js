@@ -4,10 +4,7 @@ var marker;
 var heatmap;
 var coolmap;
 
-var heatmapData;
-var coolmapData;
-
-var geocoder;
+let geocoder;
 
 var addrData;
 
@@ -33,93 +30,7 @@ function initMap()
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
     }).addTo(mymap);
 
-    //geocoder = L.Control.geocoder().addTo(mymap);
-
-
-    /*var mOptions =
-    {
-        zoom: 15,
-        center: durham,
-        disableDefaultUI: true,
-        gestureHandling: 'greedy',
-        styles:
-        [
-            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-            {
-                featureType: 'poi',
-                elementType: 'labels',
-                stylers: [{visibility: "off"}]
-            },
-            {
-                featureType: 'landscape.man_made',
-                elementType: 'geometry',
-                styles: [{color: "#99FF33"}]
-            },
-            {
-                featureType: 'poi.park',
-                elementType: 'geometry',
-                stylers: [{color: '#263c3f'}]
-            },
-            {
-                featureType: 'road',
-                elementType: 'geometry',
-                stylers: [{color: '#38414e'}]
-            },
-            {
-                featureType: 'road',
-                elementType: 'geometry.stroke',
-                stylers: [{color: '#212a37'}]
-            },
-            {
-                featureType: 'road',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#9ca5b3'}]
-            },
-            {
-                featureType: 'road.highway',
-                elementType: 'geometry',
-                stylers: [{color: '#746855'}]
-            },
-            {
-                featureType: 'road.highway',
-                elementType: 'labels.icon',
-                stylers: [{visibility: "off"}]
-            },
-            {
-                featureType: 'road.arterial',
-                elementType: 'labels.icon',
-                stylers: [{visibility: "off"}]
-            },
-            {
-                featureType: 'water',
-                elementType: 'labels',
-                stylers: [{visibility: "off"}]
-            },
-            {
-                featureType: 'transit.station',
-                elementType: 'labels',
-                stylers: [{visibility: 'off'}]
-            },
-            {
-                featureType: 'water',
-                elementType: 'geometry',
-                stylers: [{color: '#17263c'}]
-            }
-        ]
-
-    }*/
-
-    //map = new google.maps.Map( document.getElementById('map'), mOptions);
-
-    /*heatmapData = [];
-    coolmapData = [];*/
-
-    heatmap = L.heatLayer([], {radius: 10, maxZoom: 16, blur: 15, gradient: {
-        0.3: 'green', 0.5: 'yellow', 0.8: 'orange', 1: 'red'
-    }}).addTo(mymap);
-
+    heatmap = L.heatLayer([], {radius: 10, maxZoom: 16, blur: 15, gradient: { 0.3: 'green', 0.5: 'yellow', 0.8: 'orange', 1: 'red' }}).addTo(mymap);
     coolmap = L.heatLayer([], {radius: 10, maxZoom: 16, blur: 15, gradient: {0.3: 'cyan', 0.5: 'blue', 0.8: 'purple', 1: 'red'}}).addTo(mymap);
     addrData = new Object();
 
@@ -131,7 +42,6 @@ function initMap()
             res[i];
 
             var weight = parseInt(res[i]["weight"]);
-            //t var point = new google.maps.LatLng( res[i]["lat"], res[i]["lng"]);
 
             var address = res[i]["addr"].split(',')[0];
 
@@ -150,35 +60,6 @@ function initMap()
             lastId = res[i]["id"];
         }
 
-        /*heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData, radius: 20, opacity: 0.7});, gradient:
-                ['rgba(255, 0, 0, 0)',
-                'rgba(255, 255, 0, 0.9)',
-                'rgba(0, 255, 0, 0.7)',
-                'rgba(173, 255, 47, 0.5)',
-                'rgba(152, 251, 152, 0)',
-                'rgba(152, 251, 152, 0)',
-                'rgba(0, 0, 238, 0.5)',
-                'rgba(186, 85, 211, 0.7)',
-                'rgba(255, 0, 255, 0.9)',
-                'rgba(255, 0, 0, 1)'] });
-        coolmap = new google.maps.visualization.HeatmapLayer({data: coolmapData, gradient:
-        ['rgba(0, 255, 255, 0)',
-            'rgba(0, 255, 255, 1)',
-            'rgba(0, 191, 255, 1)',
-            'rgba(0, 127, 255, 1)',
-            'rgba(0, 63, 255, 1)',
-            'rgba(0, 0, 255, 1)',
-            'rgba(0, 0, 223, 1)',
-            'rgba(0, 0, 191, 1)',
-            'rgba(0, 0, 159, 1)',
-            'rgba(0, 0, 127, 1)',
-            'rgba(63, 0, 91, 1)',
-            'rgba(127, 0, 63, 1)',
-            'rgba(191, 0, 31, 1)',
-            'rgba(255, 0, 0, 1)'], radius: 20, opacity: 0.7});
-
-        heatmap.setMap(map);
-        coolmap.setMap(map);*/
     });
 
     downloadUrl('php/getdesc.php', function(event)
@@ -226,7 +107,6 @@ function initMap()
 
     var source = new EventSource("php/phpsqlinfo_lastrow.php");
 
-    //very important function, make it its onw
     source.onmessage = function(event) {
         checkLast(event);
     };
@@ -324,7 +204,6 @@ function checkLast(event)
 
         if(a === cur)
             document.getElementById("desc").innerText = desc['info'];
-
     }
 }
 
@@ -339,9 +218,7 @@ function openMenu()
 
     title.innerText = cur;
     title.setAttribute("href", "https://m.uber.com/ul/?action=setPickup&client_id=G_iICjf80han-aBqCiHR0jF9LIKxmtG-&pickup=my_location&dropoff[formatted_address]=" + cur + "&dropoff[latitude]=" + marker.getLatLng().lat + "&dropoff[longitude]=" + marker.getLatLng().lng);
-    //setElemText("desc", "description here");
     desc.innerText = addrData[cur] ? addrData[cur]['info'] : "Add description";
-    //desc.innerText = addrData[cur]['info'];//"Add description";
     desc.setAttribute("contenteditable", "true");
 
     desc.onclick = function()
@@ -353,7 +230,6 @@ function openMenu()
     {
         if(e.key === "Enter")
         {
-
             desc.setAttribute("contenteditable", "false");
             desc.onclick = function(){};
             //add savign code here
@@ -363,7 +239,6 @@ function openMenu()
 
     desc.onfocusout = function(e)
     {
-
         desc.setAttribute("contenteditable", "false");
         desc.onclick = function(){};
         //add savign code here
@@ -426,12 +301,8 @@ function up() {
     if(status === "0")
     {
         document.getElementById("up").style.backgroundColor = 'green';
-        /*if(status === "-1")
-            document.getElementById("down").style.backgroundColor = 'inherit';*/
 
         setElemText("upvalue", parseInt(document.getElementById('upvalue').innerText) + 1);
-        /*heatmapData.push(marker.getPosition());
-        heatmap.setMap(map);*/
         saveData(1);
         status = 1;
     }
@@ -444,12 +315,9 @@ function down()
     if(status === "0")
     {
         document.getElementById("down").style.backgroundColor = "#800000";
-        /*if(status === "1")
-            document.getElementById("up").style.backgroundColor = 'inherit';*/
 
         setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) + 1);
-        /*heatmapData.push(marker.getPosition());
-        heatmap.setMap(map);*/
+
         saveData(-1);
         status = -1;
     }
@@ -503,24 +371,15 @@ function saveData(weight)
         else
             window.alert('No nearby addresses found');
     });
-
-    /*geocoder.geocode({'location': latlng}, function(results, status)
-    {
-        writeEntry(latlng,weight, results,status);
-    });*/
 }
 
 function writeEntry(latlng, weight, results, status)
 {
     var a = "-1";
-    //if(status === 'OK') {
-        if (results[0])
-            a = results[0]["formatted_address"];
-        else
-            window.alert('No results found');
-    //}
-    //else
-        //window.alert('Geocoder failed due to: ' + status);
+    if (results[0])
+        a = results[0]["formatted_address"];
+    else
+        window.alert('No results found');
 
     //-----------------------
     var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat + '&lng=' + latlng.lng + '&addr=' + a + '&up=' + weight;
