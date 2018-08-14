@@ -138,12 +138,12 @@ function initMap()
             if (weight > 0) {
                 addrData[address].up++;
                 heatmapData.push(point);
-                heatmap.addLatLng({lat:res[i]["lat"], lng:res[i]["lng"]});
+                heatmap.addLatLng([res[i]["lat"], res[i]["lng"]]);
             }
             else {
                 addrData[address].down++;
                 coolmapData.push(point);
-                coolmap.addLatLng({lat:res[i]["lat"], lng:res[i]["lng"]});
+                coolmap.addLatLng([res[i]["lat"], res[i]["lng"]]);
             }
 
             lastId = res[i]["id"];
