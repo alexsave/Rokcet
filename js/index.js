@@ -120,7 +120,7 @@ function initMap()
         0.3: 'green', 0.5: 'yellow', 0.8: 'orange', 1: 'red'
     }}).addTo(mymap);
 
-    coolmap = L.heatLayer([], {radius: 10, maxZoom: 16, blur: 15, gradient: {0.3: 'green', 0.5: 'blue', 0.8: 'purple', 1: 'red'}}).addTo(mymap);
+    coolmap = L.heatLayer([], {radius: 10, maxZoom: 16, blur: 15, gradient: {0.3: 'cyan', 0.5: 'blue', 0.8: 'purple', 1: 'red'}}).addTo(mymap);
     addrData = new Object();
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(event) {
