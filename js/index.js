@@ -137,19 +137,17 @@ function initMap()
 
             if (weight > 0) {
                 addrData[address].up++;
-                heatmapData.push(point);
                 heatmap.addLatLng([res[i]["lat"], res[i]["lng"]]);
             }
             else {
                 addrData[address].down++;
-                coolmapData.push(point);
                 coolmap.addLatLng([res[i]["lat"], res[i]["lng"]]);
             }
 
             lastId = res[i]["id"];
         }
 
-        heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData, radius: 20, opacity: 0.7});/*, gradient:
+        /*heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData, radius: 20, opacity: 0.7});, gradient:
                 ['rgba(255, 0, 0, 0)',
                 'rgba(255, 255, 0, 0.9)',
                 'rgba(0, 255, 0, 0.7)',
@@ -159,7 +157,7 @@ function initMap()
                 'rgba(0, 0, 238, 0.5)',
                 'rgba(186, 85, 211, 0.7)',
                 'rgba(255, 0, 255, 0.9)',
-                'rgba(255, 0, 0, 1)'] });*/
+                'rgba(255, 0, 0, 1)'] });
         coolmap = new google.maps.visualization.HeatmapLayer({data: coolmapData, gradient:
         ['rgba(0, 255, 255, 0)',
             'rgba(0, 255, 255, 1)',
@@ -177,7 +175,7 @@ function initMap()
             'rgba(255, 0, 0, 1)'], radius: 20, opacity: 0.7});
 
         heatmap.setMap(map);
-        coolmap.setMap(map);
+        coolmap.setMap(map);*/
     });
 
     downloadUrl('php/getdesc.php', function(event)
