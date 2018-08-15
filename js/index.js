@@ -128,7 +128,7 @@ function openSearch()
                 marker.setMap(null);
             }
 
-            downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?address=1+Main+St,+Durham,+NH", function(results)
+            downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?address=" + document.getElementById("text").innerText+",+Durham,+NH", function(results)
             {
                 results = JSON.parse(results.responseText)['results'];
                 if (results[0])
