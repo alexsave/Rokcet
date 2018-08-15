@@ -119,7 +119,7 @@ function openSearch()
 
             for(var o in addrData)
             {
-                console.log(o.info);
+                console.log(addrData[o].info);
 
             }
 
