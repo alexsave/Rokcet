@@ -107,23 +107,39 @@ function initMap()
 
 function openSearch()
 {
+    var textEl = document.getElementById("text");
     document.getElementById("search").style.display = "none";
     document.getElementById("searchfield").style.display = "block";
-    document.getElementById("text").setAttribute("contenteditable", "true");
+    textEl.setAttribute("contenteditable", "true");
 
-    document.getElementById("text").onkeypress = function(e)
+    textEl.onkeypress = function(e)
     {
         if(e.key === "Enter") {
             document.getElementById("search").style.display = "block";
             document.getElementById("searchfield").style.display = "none";
 
+            var search = textEl.innerText;
+
             for(var o in addrData)
             {
-                console.log(addrData[o].info);
+                //addrData[o].info; //is what you want to work with
+
+                //see if any desc contains the search string, case insensitive
+                if(addrData[o].info.toLowerCase().indexOf(search.toLowerCase()) !== -1)
+                {
+                    //cur = o;
+                    search = o;
+                    //textEl.innerText = o;
+
+
+                    break;
+                    //return;
+                }
+
 
             }
 
-            downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?address=" + document.getElementById("text").innerText+",+Durham,+NH", function(results)
+            downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?address=" + search + ",+Durham,+NH", function(results)
             {
                 results = JSON.parse(results.responseText)['results'];
                 if (results[0])
@@ -144,7 +160,7 @@ function openSearch()
                     openMenu();
                 }
             });
-            document.getElementById("text").innerText = "";
+            textEl.innerText = "";
         }
     };
 
