@@ -122,21 +122,11 @@ function openSearch()
 
             for(var o in addrData)
             {
-                //addrData[o].info; //is what you want to work with
-
-                //see if any desc contains the search string, case insensitive
                 if(addrData[o].info.toLowerCase().indexOf(search.toLowerCase()) !== -1)
                 {
-                    //cur = o;
                     search = o;
-                    //textEl.innerText = o;
-
-
                     break;
-                    //return;
                 }
-
-
             }
 
             downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?address=" + search + ",+Durham,+NH", function(results)
