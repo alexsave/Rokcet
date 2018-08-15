@@ -128,8 +128,39 @@ function openSearch()
                 marker.setMap(null);
             }
 
+            downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?address=1+Main+St,+Durham,+NH", function(results)
+            {
+                results = JSON.parse(results.responseText)['results'];
+                if (results[0])
+                {
+                    cur = results[0]["formatted_address"].split(',')[0];
+                    var latlng = results[0]['geometry']['location'];
+
+                    if(latlng.lat < 43.1 || latlng.lat > 43.2 || latlng.lng < -71 || latlng.lng > -70.9)
+                        return;
+
+                    if(marker)
+                        mymap.removeLayer(marker);
+
+                    marker = L.circleMarker(latlng,
+                        {
+                            radius: 2,
+                            color: 'red',
+                            strokeWeight: 1,
+                            fillColor: 'red',
+                            fillOpacity: 0.5
+                        });
+
+                    marker.addTo(mymap);
+
+                    mymap.setView(latlng, 18);
+
+                    openMenu();
+                }
+            });
+
             //jesus fuck theres gotta be a better way
-            geocoder.geocode({'address': document.getElementById("text").innerText + " Durham NH"}, function (results, status) {
+            /*geocoder.geocode({'address': document.getElementById("text").innerText + " Durham NH"}, function (results, status) {
                 if (status === 'OK') {
                     if (results[0]) {
                         cur = results[0]["formatted_address"].split(',')[0];
@@ -154,7 +185,7 @@ function openSearch()
                     else
                         window.alert('No nearby addresses found');
                 }
-            });
+            });*/
         }
     };
 
