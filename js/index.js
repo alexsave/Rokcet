@@ -1,23 +1,23 @@
-var mymap;
-var marker;
+let mymap;
+let marker;
 
-var heatmap;
-var coolmap;
+let heatmap;
+let coolmap;
 
-var addrData;
+let addrData;
 
-var cur = "";
-var status = 0;
+let cur = "";
+let status = 0;
 
-var lastId;
-var lastDescTime;
+let lastId;
+let lastDescTime;
 
 //initMap();
 window.onload = initMap;
 
 function initMap()
 {
-    var durham = {lat: 43.136, lng: -70.926};
+    let durham = {lat: 43.136, lng: -70.926};
     mymap = L.map('mapid').setView(durham, 15);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,15 +39,13 @@ function initMap()
     });
 
     downloadUrl('php/phpsqlinfo_getxml.php', function(event) {
-        var res = JSON.parse(event.responseText);
+        let res = JSON.parse(event.responseText);
 
-        for(var i = 0; i < res.length; i++)
+        for(let i = 0; i < res.length; i++)
         {
-            res[i];
+            let weight = parseInt(res[i]["weight"]);
 
-            var weight = parseInt(res[i]["weight"]);
-
-            var address = res[i]["addr"].split(',')[0];
+            let address = res[i]["addr"].split(',')[0];
 
             if (!addrData[address])
                 addrData[address] = {up: 0, down: 0, info: "Add description"};
@@ -68,10 +66,10 @@ function initMap()
     downloadUrl('php/getdesc.php', function(event)
     {
         //alert(event.responseText);
-        var res = JSON.parse(event.responseText);
+        let res = JSON.parse(event.responseText);
         //alert(res[0]['addr']);
 
-        for(var i = 0; i < res.length; i++)
+        for(let i = 0; i < res.length; i++)
         {
             if (!addrData[res[i]['addr']])
                 addrData[res[i]['addr']] = {up: 0, down: 0, info: "Add description"};
@@ -98,7 +96,7 @@ function initMap()
         codeCoor(e.latlng, openMenu);
     });
 
-    var source = new EventSource("php/phpsqlinfo_lastrow.php");
+    let source = new EventSource("php/phpsqlinfo_lastrow.php");
 
     source.onmessage = function(event) {
         checkLast(event);
@@ -107,7 +105,7 @@ function initMap()
 
 function openSearch()
 {
-    var textEl = document.getElementById("text");
+    let textEl = document.getElementById("text");
     document.getElementById("search").style.display = "none";
     document.getElementById("searchfield").style.display = "block";
     textEl.setAttribute("contenteditable", "true");
@@ -118,9 +116,9 @@ function openSearch()
             document.getElementById("search").style.display = "block";
             document.getElementById("searchfield").style.display = "none";
 
-            var search = textEl.innerText;
+            let search = textEl.innerText;
 
-            for(var o in addrData)
+            for(let o in addrData)
             {
                 if(addrData[o].info.toLowerCase().indexOf(search.toLowerCase()) !== -1)
                 {
@@ -135,7 +133,7 @@ function openSearch()
                 if (results[0])
                 {
                     cur = results[0]["formatted_address"].split(',')[0];
-                    var latlng = results[0]['geometry']['location'];
+                    let latlng = results[0]['geometry']['location'];
 
                     if(latlng.lat < 43.1 || latlng.lat > 43.2 || latlng.lng < -71 || latlng.lng > -70.9)
                         return;
@@ -159,15 +157,15 @@ function openSearch()
 
 function checkLast(event)
 {
-    var two = JSON.parse(event.data);
-    var res = two["vote"];
-    var desc = two["desc"];
+    let two = JSON.parse(event.data);
+    let res = two["vote"];
+    let desc = two["desc"];
 
     if(lastId && res['id'] !== lastId)
     {
         lastId = res['id'];
 
-        var a = res['addr'].split(",")[0];
+        let a = res['addr'].split(",")[0];
         if(!addrData[a])
             addrData[a] = {up: 0, down: 0, info: "Add description"};
 
@@ -192,7 +190,7 @@ function checkLast(event)
     {
         lastDescTime = desc['time'];
 
-        var a = desc['addr'].split(",")[0];
+        let a = desc['addr'].split(",")[0];
         if(!addrData[a])
             addrData[a] = {up: 0, down: 0, info: "Add description"};
 
@@ -207,10 +205,10 @@ function checkLast(event)
 function openMenu()
 {
     status = 0;
-    var menu = document.getElementById("menu");
+    let menu = document.getElementById("menu");
 
-    var title = document.getElementById("title");
-    var desc = document.getElementById("desc");
+    let title = document.getElementById("title");
+    let desc = document.getElementById("desc");
 
     title.innerText = cur;
     title.setAttribute("href", "https://m.uber.com/ul/?action=setPickup&client_id=G_iICjf80han-aBqCiHR0jF9LIKxmtG-&pickup=my_location&dropoff[formatted_address]=" + cur + "&dropoff[latitude]=" + marker.getLatLng().lat + "&dropoff[longitude]=" + marker.getLatLng().lng);
@@ -239,9 +237,9 @@ function openMenu()
         desc.onclick = function(){};
         //add savign code here
         updateDesc();
-    }
+    };
 
-    var up, down;
+    let up, down;
     if(addrData[cur])
     {
         up = addrData[cur].up;
@@ -262,21 +260,21 @@ function openMenu()
 
 function updateDesc()
 {
-    var a = cur;
-    var d = document.getElementById("desc").innerText;
+    let a = cur;
+    let d = document.getElementById("desc").innerText;
 
     if (!addrData[cur])
         addrData[cur] = {up: 0, down: 0, info: "Add description"};
     addrData[cur].info = document.getElementById("desc").innerText;
 
-    var url = 'php/updatedesc.php?addr=' + a + '&desc=' + d;
+    let url = 'php/updatedesc.php?addr=' + a + '&desc=' + d;
 
     downloadUrl(url, function(data, responseCode) { });
 }
 
 function checkCookie()
 {
-    var idk = document.cookie.indexOf('submits=');
+    let idk = document.cookie.indexOf('submits=');
     if(idk === -1)
         return 0;
     else
@@ -323,7 +321,7 @@ function down()
 //literally use innerhtml
 function setElemText(id, text)
 {
-    var elem = document.getElementById(id);
+    let elem = document.getElementById(id);
 
     while(elem.firstChild)
         elem.removeChild(elem.firstChild);
@@ -349,7 +347,7 @@ function codeCoor(latLng, callback)
     /*downloadUrl(" https://nominatim.openstreetmap.org/reverse?format=json&lat=" + latLng.lat + "&lon=" + latLng.lng + "&zoom=18&addressdetails=1", function(results)
     {
         //there might be a better way but idk
-        var addr = JSON.parse(results.responseText).display_name;
+        let addr = JSON.parse(results.responseText).display_name;
         cur = addr.split(',')[0] + addr.split(',')[1];
         callback();
     });*/
@@ -357,7 +355,7 @@ function codeCoor(latLng, callback)
 
 function saveData(weight)
 {
-    var latLng = marker.getLatLng();
+    let latLng = marker.getLatLng();
 
     downloadUrl("http://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng , function(results)
     {
@@ -371,14 +369,14 @@ function saveData(weight)
 
 function writeEntry(latlng, weight, results, status)
 {
-    var a = "-1";
+    let a = "-1";
     if (results[0])
         a = results[0]["formatted_address"];
     else
         window.alert('No results found');
 
     //-----------------------
-    var url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat + '&lng=' + latlng.lng + '&addr=' + a + '&up=' + weight;
+    let url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat + '&lng=' + latlng.lng + '&addr=' + a + '&up=' + weight;
 
     downloadUrl(url, function(data, responseCode) {
         if (responseCode === 200 && data.responseText.length <= 1) {
@@ -390,23 +388,23 @@ function writeEntry(latlng, weight, results, status)
 
 function updateCookie()
 {
-    var idk = document.cookie.indexOf('submits=');
+    let idk = document.cookie.indexOf('submits=');
 
-    var c = 1;
+    let c = 1;
     if(idk !== -1)
     {
         c = parseInt(document.cookie.substring(idk + 'submits='.length, document.cookie.length));
         c++;
     }
 
-    var t = new Date();
+    let t = new Date();
     t.setTime(t.getTime() + (8*60*60*1000));
     document.cookie = 'submits=' + c + ";expires=" + t.toUTCString();
 }
 
 function downloadUrl(url, callback)
 {
-    var request = new XMLHttpRequest;
+    let request = new XMLHttpRequest;
 
     request.onreadystatechange = function()
     {
