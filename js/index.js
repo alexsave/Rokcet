@@ -34,6 +34,14 @@ function initMap()
     coolmap = L.heatLayer([], {radius: 10, maxZoom: 16, blur: 15, gradient: {0.3: 'cyan', 0.5: 'blue', 0.8: 'purple', 1: 'red'}}).addTo(mymap);
     addrData = new Object();
 
+    marker = L.circleMarker([0,0], {
+        radius: 2,
+        color: 'red',
+        strokeWeight: 1,
+        fillColor: 'red',
+        fillOpacity: 0.5
+    });
+
     downloadUrl('php/phpsqlinfo_getxml.php', function(event) {
         var res = JSON.parse(event.responseText);
 
@@ -87,19 +95,9 @@ function initMap()
         if(marker)
             mymap.removeLayer(marker);
 
-        marker = L.circleMarker(e.latlng,
-            {
-                radius: 2,
-                color: 'red',
-                strokeWeight: 1,
-                fillColor: 'red',
-                fillOpacity: 0.5
-            });
-
-        marker.addTo(mymap);
-
-        //make it scroll to the event, zoom in, and
         //scrolling away will close the menu
+        marker.setLatLng(e.latlng);
+        marker.addTo(mymap);
         mymap.setView(e.latlng, 18);
 
         codeCoor(e.latlng, openMenu);
@@ -142,22 +140,14 @@ function openSearch()
                     if(marker)
                         mymap.removeLayer(marker);
 
-                    marker = L.circleMarker(latlng,
-                        {
-                            radius: 2,
-                            color: 'red',
-                            strokeWeight: 1,
-                            fillColor: 'red',
-                            fillOpacity: 0.5
-                        });
-
+                    marker.setLatLng(latlng);
                     marker.addTo(mymap);
-
                     mymap.setView(latlng, 18);
 
                     openMenu();
                 }
             });
+            document.getElementById("text").innerText = "";
 
             //jesus fuck theres gotta be a better way
             /*geocoder.geocode({'address': document.getElementById("text").innerText + " Durham NH"}, function (results, status) {
