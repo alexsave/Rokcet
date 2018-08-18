@@ -128,7 +128,10 @@ body, html, #mapid
     outline: none;
 }
 
-/*#mapid
+#heatscore
 {
-    height: 100%;
-}*/
+    width: 25%;
+    margin: 5px 0;
+    border-style: none;
+    box-shadow: none;
+}
