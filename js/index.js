@@ -276,7 +276,7 @@ function openMenu()
     let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
 
     setElemText("upvalue", up);
-    document.getElementById("heatscore").innerText = heatscore + "\n🔥";
+    document.getElementById("heatscore").innerText = heatscore + "🔥";
     setElemText("downvalue", down);
 
     document.getElementById("up").style.backgroundColor = 'inherit';
@@ -366,8 +366,7 @@ function codeCoor(latLng, callback)
             cur = results[0]["formatted_address"].split(',')[0];
             callback();
         }
-        else
-            window.alert('No nearby addresses found');
+            //window.alert('No nearby addresses found');
     });
 
     /*downloadUrl(" https://nominatim.openstreetmap.org/reverse?format=json&lat=" + latLng.lat + "&lon=" + latLng.lng + "&zoom=18&addressdetails=1", function(results)
@@ -388,8 +387,7 @@ function saveData(weight)
         results = JSON.parse(results.responseText)['results'];
         if (results[0])
             writeEntry(latLng, weight, results, status);
-        else
-            window.alert('No nearby addresses found');
+            //window.alert('No nearby addresses found');
     });
 }
 
@@ -399,7 +397,7 @@ function writeEntry(latlng, weight, results, status)
     if (results[0])
         a = results[0]["formatted_address"];
     else
-        window.alert('No results found');
+        //window.alert('No results found');
 
     //-----------------------
     let url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat + '&lng=' + latlng.lng + '&addr=' + a + '&up=' + weight;
