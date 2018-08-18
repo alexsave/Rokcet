@@ -396,7 +396,6 @@ function writeEntry(latlng, weight, results, status)
     let a = "-1";
     if (results[0])
         a = results[0]["formatted_address"];
-    else
         //window.alert('No results found');
 
     //-----------------------
