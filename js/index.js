@@ -274,9 +274,9 @@ function openMenu()
     }
 
     let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
+    document.getElementById("heatscore").innerText = heatscore + "🔥";
 
     setElemText("upvalue", up);
-    document.getElementById("heatscore").innerText = heatscore + "🔥";
     setElemText("downvalue", down);
 
     document.getElementById("up").style.backgroundColor = 'inherit';
@@ -318,11 +318,15 @@ function up() {
     if(checkCookie() > 10)
         return;
 
+    getMaxScore();
     if(status === 0)
     {
         document.getElementById("up").style.backgroundColor = 'green';
 
         setElemText("upvalue", parseInt(document.getElementById('upvalue').innerText) + 1);
+        let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
+        document.getElementById("heatscore").innerText = heatscore + "🔥";
+
         saveData(1);
         status = 1;
     }
@@ -332,11 +336,15 @@ function down()
 {
     if(checkCookie() > 10)
         return;
+
+    getMaxScore();
     if(status === 0)
     {
         document.getElementById("down").style.backgroundColor = "#800000";
 
         setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) + 1);
+        let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
+        document.getElementById("heatscore").innerText = heatscore + "🔥";
 
         saveData(-1);
         status = -1;
