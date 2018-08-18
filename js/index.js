@@ -200,11 +200,15 @@ function checkLast(event)
             coolmap.addLatLng([res["lat"], res["lng"]]);
         }
 
+        getMaxScore();
+
         //currently open
         if(a === cur)
         {
             setElemText("upvalue", addrData[a].up);
             setElemText("downvalue", addrData[a].down);
+            let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
+            document.getElementById("heatscore").innerText = heatscore + "🔥";
         }
     }
 
