@@ -303,7 +303,7 @@ function up() {
     if(checkCookie() > 10)
         return;
 
-    if(status === "0")
+    if(status === 0)
     {
         document.getElementById("up").style.backgroundColor = 'green';
 
@@ -317,7 +317,7 @@ function down()
 {
     if(checkCookie() > 10)
         return;
-    if(status === "0")
+    if(status === 0)
     {
         document.getElementById("down").style.backgroundColor = "#800000";
 
