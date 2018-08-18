@@ -273,10 +273,10 @@ function openMenu()
         down = "0";
     }
 
-    let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore;
+    let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
 
     setElemText("upvalue", up);
-    document.getElementById("heatscore").innerText = heatscore + "%";
+    document.getElementById("heatscore").innerText = heatscore + "\n🔥";
     setElemText("downvalue", down);
 
     document.getElementById("up").style.backgroundColor = 'inherit';
