@@ -116,14 +116,25 @@ function openSearch()
             document.getElementById("search").style.display = "block";
             document.getElementById("searchfield").style.display = "none";
 
-            let search = textEl.innerText;
+            let res = textEl.innerText;
+            let search = res;
 
             for(let o in addrData)
             {
-                if(addrData[o].info.toLowerCase().indexOf(search.toLowerCase()) !== -1)
+                if(addrData[o].info.toLowerCase() == res.toLowerCase())
                 {
                     search = o;
                     break;
+                }
+                else if(addrData[o].info.toLowerCase().indexOf(res.toLowerCase()) !== -1)
+                {
+                    if(addrData[search])
+                    {
+                        if (addrData[o]['up'] > addrData[search]['up']) ;
+                            search = o;
+                    }
+                    else
+                        search = o;
                 }
             }
 
