@@ -130,7 +130,7 @@ function openSearch()
                 {
                     if(addrData[search])
                     {
-                        if (addrData[o]['up'] > addrData[search]['up']) ;
+                        if (addrData[o]['up'] > addrData[search]['up'])
                             search = o;
                     }
                     else
