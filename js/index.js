@@ -12,6 +12,8 @@ let status = 0;
 let lastId;
 let lastDescTime;
 
+let maxScore = 1;
+
 //initMap();
 window.onload = initMap;
 
@@ -61,6 +63,7 @@ function initMap()
 
             lastId = res[i]["id"];
         }
+        getMaxScore();
     });
 
     downloadUrl('php/getdesc.php', function(event)
@@ -103,6 +106,14 @@ function initMap()
     };
 }
 
+function getMaxScore() {
+    for (let o in addrData)
+    {
+        if(addrData[o].up > maxScore)
+            maxScore = addrData[o].up;
+    }
+}
+
 function openSearch()
 {
     let textEl = document.getElementById("text");
@@ -121,7 +132,7 @@ function openSearch()
 
             for(let o in addrData)
             {
-                if(addrData[o].info.toLowerCase() == res.toLowerCase())
+                if(addrData[o].info.toLowerCase() === res.toLowerCase())
                 {
                     search = o;
                     break;
@@ -256,12 +267,16 @@ function openMenu()
         up = addrData[cur].up;
         down = addrData[cur].down;
     }
-    else {
+    else
+    {
         up = "0";
         down = "0";
     }
 
+    let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore;
+
     setElemText("upvalue", up);
+    document.getElementById("heatscore").innerText = heatscore + "%";
     setElemText("downvalue", down);
 
     document.getElementById("up").style.backgroundColor = 'inherit';
