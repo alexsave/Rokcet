@@ -464,7 +464,7 @@ function downloadPost(url, params, callback)
     let request = new XMLHttpRequest;
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.setRequestHeader("Content-length", params.length);
-    request.setRequestHeader("Connection", "close");
+
     request.onreadystatechange = function()
     {
         if(request.readyState === 4)
