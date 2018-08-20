@@ -206,8 +206,8 @@ function checkLast(event)
         //currently open
         if(a === cur)
         {
-            setElemText("upvalue", addrData[a].up);
-            setElemText("downvalue", addrData[a].down);
+            document.getElementById("upvalue").innexrText = addrData[a].up;
+            document.getElementById("downvalue").innexrText = addrData[a].down;
             let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
             document.getElementById("heatscore").innerText = heatscore + "🔥";
         }
@@ -282,8 +282,8 @@ function openMenu()
 
     document.getElementById("heatscore").innerText = heatscore + "🔥";
 
-    setElemText("upvalue", up);
-    setElemText("downvalue", down);
+    document.getElementById("upvalue").innerText = up;
+    document.getElementById("downvalue").innerText = down;
 
     document.getElementById("up").style.backgroundColor = 'inherit';
     document.getElementById("down").style.backgroundColor = 'inherit';
@@ -330,7 +330,7 @@ function up() {
     {
         document.getElementById("up").style.backgroundColor = 'green';
 
-        setElemText("upvalue", parseInt(document.getElementById('upvalue').innerText) + 1);
+        document.getElementById("upvalue").innerText = parseInt(document.getElementById('upvalue').innerText) + 1;
         if(addrData[cur])
         {
             let heatscore = (addrData[cur].up - addrData[cur].down) / maxScore * 100;
@@ -352,7 +352,8 @@ function down()
     {
         document.getElementById("down").style.backgroundColor = "#800000";
 
-        setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) + 1);
+        //setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) + 1);
+        document.getElementById("downvalue").innerText = parseInt(document.getElementById('downvalue').innerText) + 1;
         if(addrData[cur])
         {
             let heatscore = (addrData[cur].up - addrData[cur].down) / maxScore * 100;
@@ -363,19 +364,6 @@ function down()
         status = -1;
     }
 }
-
-//clear all children and set inner textnode to some text
-//literally use innerhtml
-function setElemText(id, text)
-{
-    let elem = document.getElementById(id);
-
-    while(elem.firstChild)
-        elem.removeChild(elem.firstChild);
-
-    elem.appendChild(document.createTextNode(text));
-}
-
 
 function codeCoor(latLng, callback)
 {
