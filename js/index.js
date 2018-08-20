@@ -150,7 +150,7 @@ function openSearch()
                 }
             }
 
-            downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?address=" + search + ",+Durham,+NH", function(results)
+            downloadPost("https://maps.googleapis.com/maps/api/geocode/json?address=" + search + ",+Durham,+NH", "", function(results)
             {
                 results = JSON.parse(results.responseText)['results'];
                 if (results[0])
@@ -452,6 +452,21 @@ function downloadUrl(url, callback)
     };
     request.open('GET', url, true);
     request.send(null);
+}
+
+function downloadPost(url, params, callback)
+{
+    let request = new XMLHttpRequest;
+    request.onreadystatechange = function()
+    {
+        if(request.readyState === 4)
+        {
+            request.onreadystatechange = doNothing;
+            callback(request, request.status);//this line needs to be changed to response xml
+        }
+    };
+    request.open('POST', url, true);
+    request.send(params);
 }
 
 function doNothing() {}
