@@ -371,7 +371,7 @@ function setElemText(id, text)
 
 function codeCoor(latLng, callback)
 {
-    downloadUrl("http://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng , function(results)
+    downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng , function(results)
     {
         results = JSON.parse(results.responseText)['results'];
         if (results[0])
@@ -395,7 +395,7 @@ function saveData(weight)
 {
     let latLng = marker.getLatLng();
 
-    downloadUrl("http://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng , function(results)
+    downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng , function(results)
     {
         results = JSON.parse(results.responseText)['results'];
         if (results[0])
