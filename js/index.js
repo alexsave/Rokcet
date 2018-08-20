@@ -299,9 +299,10 @@ function updateDesc()
         addrData[cur] = {up: 0, down: 0, info: "Add description"};
     addrData[cur].info = document.getElementById("desc").innerText;
 
-    let url = 'php/updatedesc.php?addr=' + a + '&desc=' + d;
+    let url = 'php/updatedesc.php';
+    let params = "addr=" + a + "&desc=" + d;
 
-    downloadUrl(url, function(data, responseCode) { });
+    downloadUrl(url, params, function(data, responseCode) { });
 }
 
 function checkCookie()
