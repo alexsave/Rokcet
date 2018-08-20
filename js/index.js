@@ -302,7 +302,7 @@ function updateDesc()
     let url = 'php/updatedesc.php';
     let params = "addr=" + a + "&desc=" + d;
 
-    downloadUrl(url, params, function(data, responseCode) { });
+    downloadPost(url, params, function(data, responseCode) { });
 }
 
 function checkCookie()
@@ -445,22 +445,6 @@ function updateCookie()
     let t = new Date();
     t.setTime(t.getTime() + (8*60*60*1000));
     document.cookie = 'submits=' + c + ";expires=" + t.toUTCString();
-}
-
-function downloadUrl(url, callback)
-{
-    let request = new XMLHttpRequest;
-
-    request.onreadystatechange = function()
-    {
-        if(request.readyState === 4)
-        {
-            request.onreadystatechange = doNothing;
-            callback(request, request.status);//this line needs to be changed to response xml
-        }
-    };
-    request.open('GET', url, true);
-    request.send(null);
 }
 
 function downloadPost(url, params, callback)
