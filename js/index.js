@@ -417,7 +417,7 @@ function writeEntry(latlng, weight, results, status)
 
     //-----------------------
     let url = 'php/phpsqlinfo_addrow.php';
-    let params = 'lat=' + latlng.lat + '&lng=' + latlng.lng + '&addr=' + a + '&up=' + weight;
+    let params = "lat=" + latlng.lat + "&lng=" + latlng.lng + "&addr=" + a + "&up=" + weight;
 
     downloadPost(url, params, function(data, responseCode) {
         if (responseCode === 200 && data.responseText.length <= 1) {
