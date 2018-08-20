@@ -330,8 +330,11 @@ function up() {
         document.getElementById("up").style.backgroundColor = 'green';
 
         setElemText("upvalue", parseInt(document.getElementById('upvalue').innerText) + 1);
-        let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
-        document.getElementById("heatscore").innerText = heatscore + "🔥";
+        if(addrData[cur])
+        {
+            let heatscore = (addrData[cur].up - addrData[cur].down) / maxScore * 100;
+            document.getElementById("heatscore").innerText = heatscore + "🔥";
+        }
 
         saveData(1);
         status = 1;
