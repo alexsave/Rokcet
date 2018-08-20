@@ -352,8 +352,11 @@ function down()
         document.getElementById("down").style.backgroundColor = "#800000";
 
         setElemText("downvalue", parseInt(document.getElementById('downvalue').innerText) + 1);
-        let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
-        document.getElementById("heatscore").innerText = heatscore + "🔥";
+        if(addrData[cur])
+        {
+            let heatscore = (addrData[cur].up - addrData[cur].down) / maxScore * 100;
+            document.getElementById("heatscore").innerText = heatscore + "🔥";
+        }
 
         saveData(-1);
         status = -1;
