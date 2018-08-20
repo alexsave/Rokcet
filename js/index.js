@@ -41,7 +41,7 @@ function initMap()
         fillOpacity: 0.5
     });
 
-    downloadUrl('php/phpsqlinfo_getxml.php', function(event) {
+    downloadPost('php/phpsqlinfo_getxml.php', "", function(event) {
         let res = JSON.parse(event.responseText);
 
         for(let i = 0; i < res.length; i++)
@@ -67,7 +67,7 @@ function initMap()
         getMaxScore();
     });
 
-    downloadUrl('php/getdesc.php', function(event)
+    downloadPost('php/getdesc.php', "", function(event)
     {
         //alert(event.responseText);
         let res = JSON.parse(event.responseText);
@@ -372,7 +372,7 @@ function setElemText(id, text)
 
 function codeCoor(latLng, callback)
 {
-    downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng , function(results)
+    downloadPost("https://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng, "", function(results)
     {
         results = JSON.parse(results.responseText)['results'];
         if (results[0])
@@ -396,7 +396,7 @@ function saveData(weight)
 {
     let latLng = marker.getLatLng();
 
-    downloadUrl("https://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng , function(results)
+    downloadPost("https://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=en&latlng=" + latLng.lat + "," +latLng.lng, "", function(results)
     {
         results = JSON.parse(results.responseText)['results'];
         if (results[0])
@@ -413,9 +413,10 @@ function writeEntry(latlng, weight, results, status)
         //window.alert('No results found');
 
     //-----------------------
-    let url = 'php/phpsqlinfo_addrow.php?lat=' + latlng.lat + '&lng=' + latlng.lng + '&addr=' + a + '&up=' + weight;
+    let url = 'php/phpsqlinfo_addrow.php';
+    let params = 'lat=' + latlng.lat + '&lng=' + latlng.lng + '&addr=' + a + '&up=' + weight;
 
-    downloadUrl(url, function(data, responseCode) {
+    downloadPost(url, params, function(data, responseCode) {
         if (responseCode === 200 && data.responseText.length <= 1) {
             /*[a].down += weight;*/
             updateCookie();
