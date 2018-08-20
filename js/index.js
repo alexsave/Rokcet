@@ -462,8 +462,11 @@ function downloadUrl(url, callback)
 function downloadPost(url, params, callback)
 {
     let request = new XMLHttpRequest;
+    request.open('POST', url, true);
+
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.setRequestHeader("Content-length", params.length);
+    request.setRequestHeader("Connection", "close");
 
     request.onreadystatechange = function()
     {
@@ -473,7 +476,6 @@ function downloadPost(url, params, callback)
             callback(request, request.status);//this line needs to be changed to response xml
         }
     };
-    request.open('POST', url, true);
     request.send(params);
 }
 
