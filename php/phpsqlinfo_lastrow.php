@@ -55,7 +55,7 @@ $res['vote'] = $data;
 $res['desc'] = $data2;
 
 echo 'data: ' . json_encode($res) . "\n\n";
-//echo 'data: ' . json_encode($_GET) . "\n\n";
+//echo 'data: ' . json_encode($_POST) . "\n\n";
 ob_flush();
 flush();
 

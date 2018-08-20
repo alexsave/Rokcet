@@ -1,10 +1,10 @@
 <?php
 require("phpsqlinfo_dbinfo.php");
 
-$lat = $_GET['lat'];
-$lng = $_GET['lng'];
-$weight = $_GET['up'];
-$addr = $_GET['addr'];
+$lat = $_POST['lat'];
+$lng = $_POST['lng'];
+$weight = $_POST['up'];
+$addr = $_POST['addr'];
 
 /*if(!$addr)
 {
@@ -51,7 +51,7 @@ header("Expires: 0");
     //$data['addr'] = $addr;
 
     //echo 'data: ' . json_encode($data) . "\n\n";
-    echo 'data: ' . json_encode($_GET) . "\n\n";
+    echo 'data: ' . json_encode($_POST) . "\n\n";
     ob_flush();
     flush();
 //}

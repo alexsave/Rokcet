@@ -1,8 +1,8 @@
 <?php
 require("phpsqlinfo_dbinfo.php");
 
-$addr = $_GET['addr'];
-$desc = $_GET['desc'];
+$addr = $_POST['addr'];
+$desc = $_POST['desc'];
 
 $connection=mysqli_connect("localhost", $username, $password);
 if(!$connection)
