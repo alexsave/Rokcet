@@ -266,19 +266,20 @@ function openMenu()
         updateDesc();
     };
 
-    let up, down;
+    let up, down, heatscore;
     if(addrData[cur])
     {
         up = addrData[cur].up;
         down = addrData[cur].down;
+        heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
     }
     else
     {
         up = "0";
         down = "0";
+        heatscore = 0;
     }
 
-    let heatscore = (addrData[cur].up-addrData[cur].down)/maxScore*100;
     document.getElementById("heatscore").innerText = heatscore + "🔥";
 
     setElemText("upvalue", up);
