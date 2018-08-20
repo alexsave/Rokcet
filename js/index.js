@@ -19,6 +19,7 @@ window.onload = initMap;
 
 function initMap()
 {
+    document.addEventListener('touchstart', doNothing, {passive: true});
     let durham = {lat: 43.136, lng: -70.926};
     mymap = L.map('mapid').setView(durham, 15);
 
